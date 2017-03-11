@@ -22,7 +22,7 @@ function createMockDomElement(options) {
   };
 }
 
-test('Is should create instance successfully', (t) =>{
+test('It should create instance successfully', (t) =>{
   t.notThrows(() => {
     new MoveTo();
   });
