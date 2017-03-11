@@ -12,24 +12,18 @@ const MoveTo = (() => {
   };
 
   /**
-   * Ease Functions
-   * @type {Object}
+   * outQuart Easing Fonksiyonu
+   * @param  {Integer} t - current time
+   * @param  {Integer} b - start value
+   * @param  {Integer} c - change in value
+   * @param  {Integer} d - duration
+   * @return {Integer} - calculated value
    */
-  const easeFunctions = {
-    /**
-     * outQuart Easing Fonksiyonu
-     * @param  {Integer} t - current time
-     * @param  {Integer} b - start value
-     * @param  {Integer} c - change in value
-     * @param  {Integer} d - duration
-     * @return {Integer} - calculated value
-     */
-    outQuart: (t, b, c, d) => {
-      t /= d;
-      t--;
-      return -c * (t * t * t * t - 1) + b;
-    },
-  };
+  function easeOutQuart(t, b, c, d) {
+    t /= d;
+    t--;
+    return -c * (t * t * t * t - 1) + b;
+  }
 
   /**
    * Returns html element's top and left offset
@@ -81,9 +75,11 @@ const MoveTo = (() => {
     /**
      * Constructer
      * @param {Object} options Options
+     * @param {Object} easeFunctions Custom ease functions
      */
-    constructor(options = {}) {
+    constructor(options = {}, easeFunctions = {}) {
       this.options = mergeObject(defaults, options);
+      this.easeFunctions = mergeObject({outQuart: easeOutQuart}, easeFunctions);
     }
 
     /**
@@ -143,7 +139,7 @@ const MoveTo = (() => {
         }
         lastPageYOffset = currentPageYOffset;
         currentTime += increment;
-        const val = easeFunctions[options.easeFunctionName](
+        const val = this.easeFunctions[options.easeFunctionName](
           currentTime, from, change, options.duration
         );
         window.scroll(0, val);
@@ -160,7 +156,7 @@ const MoveTo = (() => {
      * @param {Function} fn   Ease Function
      */
     addEaseFunction(name, fn) {
-      easeFunctions[name] = fn;
+      this.easeFunctions[name] = fn;
     }
   }
 
