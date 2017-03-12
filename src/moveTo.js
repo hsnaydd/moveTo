@@ -7,7 +7,7 @@ const MoveTo = (() => {
   const defaults = {
     tolerance: 0,
     duration: 800,
-    easeFunctionName: 'outQuart',
+    ease: 'outQuart',
   };
 
   /**
@@ -138,7 +138,7 @@ const MoveTo = (() => {
         }
         lastPageYOffset = currentPageYOffset;
         currentTime += increment;
-        const val = this.easeFunctions[options.easeFunctionName](
+        const val = this.easeFunctions[options.ease](
           currentTime, from, change, options.duration
         );
         window.scroll(0, val);
@@ -169,7 +169,7 @@ const MoveTo = (() => {
     const optionsMap = {
       'tolerance': 'tolerance',
       'duration': 'duration',
-      'easeFunctionName': 'ease-function-name'
+      'ease': 'ease-function-name'
     };
 
     Object.keys(optionsMap).forEach((key) => {
