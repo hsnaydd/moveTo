@@ -38,6 +38,10 @@ gulp scripts:lint
 // To make a full new build run:
 
 gulp build
+
+// To run tests
+
+npm test tests/**
 ```
 
 ## License
