@@ -63,31 +63,31 @@ Ease function. See [easing.js](https://gist.github.com/gre/1650294) for more eas
 ## Development setup
 
 ```sh
-// To install dev dependencies run:
+# To install dev dependencies run:
 
 yarn
 
-// or
+# or
 
 npm install
 
-// To start the development server run:
+# To start the development server run:
 
 gulp serve
 
-// To lint your code run:
+# To lint your code run:
 
 gulp scripts:lint
 
-// To make a full new build run:
+# To make a full new build run:
 
 gulp build
 
-// To run tests
+# To run tests
 
 yarn test tests/**
 
-// or
+# or
 
 npm test tests/**
 ```
