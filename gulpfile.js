@@ -22,7 +22,7 @@ var browserSyncConfigs = {
 
 var banner = [
   '/*!',
-  ' * MoveTo - Simple and lightweight javascript library for smooth scrolling to element.',
+  ' * MoveTo - A lightweight, smooth scrolling javascript library without any dependency.',
   ' * Version ' + pkg.version + ' (' + today + ')',
   ' * Licensed under ' + pkg.license,
   ' * Copyright ' + $.util.date('yyyy') + ' ' + pkg.author,
