@@ -56,6 +56,8 @@ test('It should add custom ease function', (t) => {
 
   inst.addEaseFunction('test', function() {});
 
+  t.not(inst.easeFunctions['test'], undefined);
+
   t.notThrows(() => {
     inst.move(elem, {easeFunctionName: 'test'});
   });
