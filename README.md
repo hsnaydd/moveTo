@@ -17,7 +17,42 @@ bower install moveTo --save
 
 ## Usage
 
-Preparing...
+```
+const moveTo = new MoveTo();
+
+const target = document.getElementById('target');
+
+moveTo.move(target);
+
+// or register a trigger
+
+const trigger = document.getElementsByClassName('js-trigger')[0];
+
+moveTo.registerTrigger(trigger);
+
+```
+
+Trigger HTML markup
+
+```html
+  <a href="#target" class="js-trigger" data-duration="300">Trigger</a>
+```
+
+## API
+
+### addEaseFunction(name, fn)
+
+Adds custom ease function
+
+#### name
+Type: string
+
+Ease function name
+
+#### fn
+Type: function
+
+Ease function. See [easing.js](https://gist.github.com/gre/1650294) for more ease function.
 
 ## Development setup
 
@@ -43,6 +78,10 @@ gulp build
 
 npm test tests/**
 ```
+
+## Browser Support
+
+Preparing...
 
 ## License
 
