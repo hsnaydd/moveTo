@@ -1,12 +1,11 @@
 /*!
  * MoveTo - Simple and lightweight javascript library for smooth scrolling to element.
- * Version 1.0.0 (10-03-2017 18:06)
+ * Version 1.0.0 (13-03-2017 11:23)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
 
-'use strict';var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "MoveTo" }] */
-
+'use strict';var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}
 var MoveTo = function () {
   /**
                            * Defaults
@@ -15,15 +14,10 @@ var MoveTo = function () {
   var defaults = {
     tolerance: 0,
     duration: 800,
-    easeFunctionName: 'outQuart' };
+    ease: 'outQuart' };
 
 
   /**
-                                     * Ease Functions
-                                     * @type {Object}
-                                     */
-  var easeFunctions = {
-    /**
                          * outQuart Easing Fonksiyonu
                          * @param  {Integer} t - current time
                          * @param  {Integer} b - start value
@@ -31,18 +25,17 @@ var MoveTo = function () {
                          * @param  {Integer} d - duration
                          * @return {Integer} - calculated value
                          */
-    outQuart: function outQuart(t, b, c, d) {
-      t /= d;
-      t--;
-      return -c * (t * t * t * t - 1) + b;
-    } };
-
+  function easeOutQuart(t, b, c, d) {
+    t /= d;
+    t--;
+    return -c * (t * t * t * t - 1) + b;
+  }
 
   /**
-          * Returns html element's top and left offset
-          * @param  {Node} elem - Element
-          * @return {Object} Element top and left offset
-          */
+     * Returns html element's top and left offset
+     * @param  {Node} elem - Element
+     * @return {Object} Element top and left offset
+     */
   function getOffsetSum(elem) {
     var top = 0;
     var left = 0;
@@ -88,9 +81,11 @@ var MoveTo = function () {
     /**
                          * Constructer
                          * @param {Object} options Options
+                         * @param {Object} easeFunctions Custom ease functions
                          */
-    function MoveTo() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};_classCallCheck(this, MoveTo);
+    function MoveTo() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};var easeFunctions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};_classCallCheck(this, MoveTo);
       this.options = mergeObject(defaults, options);
+      this.easeFunctions = mergeObject({ outQuart: easeOutQuart }, easeFunctions);
     }
 
     /**
@@ -119,7 +114,7 @@ var MoveTo = function () {
          * @param  {HTMLElement} target Target element to be scrolled
          * @param  {Object} options Custom options
          */ }, { key: 'move', value: function move(
-      target) {var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      target) {var _this2 = this;var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         if (!target) {
           return;
         }
@@ -150,7 +145,7 @@ var MoveTo = function () {
           }
           lastPageYOffset = currentPageYOffset;
           currentTime += increment;
-          var val = easeFunctions[options.easeFunctionName](
+          var val = _this2.easeFunctions[options.ease](
           currentTime, from, change, options.duration);
 
           window.scroll(0, val);
@@ -167,7 +162,7 @@ var MoveTo = function () {
          * @param {Function} fn   Ease Function
          */ }, { key: 'addEaseFunction', value: function addEaseFunction(
       name, fn) {
-        easeFunctions[name] = fn;
+        this.easeFunctions[name] = fn;
       } }]);return MoveTo;}();
 
 
@@ -181,7 +176,7 @@ var MoveTo = function () {
     var optionsMap = {
       'tolerance': 'tolerance',
       'duration': 'duration',
-      'easeFunctionName': 'ease-function-name' };
+      'ease': 'ease-function-name' };
 
 
     Object.keys(optionsMap).forEach(function (key) {
