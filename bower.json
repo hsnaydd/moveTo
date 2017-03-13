@@ -1,0 +1,27 @@
+{
+  "name": "moveto",
+  "description": "A lightweight, smooth scrolling javascript library without any dependency.",
+  "main": "src/moveTo.js",
+  "authors": [
+    "Hasan Aydoğdu <hsnaydd@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "simple",
+    "lightweight",
+    "scroll",
+    "animated",
+    "scrolling",
+    "animation",
+    "smooth",
+    "smoothscroll"
+  ],
+  "homepage": "https://github.com/hsnaydd/moveTo",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
