@@ -1,7 +1,7 @@
 {
   "name": "moveto",
   "version": "1.0.0",
-  "description": "Simple and lightweight javascript library for smooth scrolling to element, It has no dependency.",
+  "description": "A lightweight, smooth scrolling javascript library without any dependency.",
   "main": "src/moveTo.js",
   "scripts": {
     "test": "ava"
