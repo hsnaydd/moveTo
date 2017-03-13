@@ -11,7 +11,7 @@ const MoveTo = (() => {
   };
 
   /**
-   * outQuart Easing Fonksiyonu
+   * outQuart Easing Function
    * @param  {Integer} t - current time
    * @param  {Integer} b - start value
    * @param  {Integer} c - change in value
@@ -123,7 +123,7 @@ const MoveTo = (() => {
       let lastPageYOffset = 0;
 
       /*
-       * Scroll Animasyon Fonkstionu
+       * Scroll Animation Function
        */
       const animate = () => {
         let currentPageYOffset = window.pageYOffset;
