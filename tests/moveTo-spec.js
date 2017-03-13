@@ -63,7 +63,30 @@ test('It should add custom ease function', (t) => {
   });
 });
 
-test.cb('It should scroll to target element', (t) => {
+test.serial.cb('It should scroll to target position', (t) => {
+  const inst = new MoveTo();
+
+  const calls = [];
+
+  // mock scroll.
+  const originalScroll = window.scroll;
+  window.scroll = function(_, y) {
+    calls.push(y);
+  };
+
+  inst.move(1500);
+
+  setTimeout(() => {
+    // revert scroll.
+    window.scroll = originalScroll;
+
+    t.is(calls[calls.length - 1], 1500);
+
+    t.end();
+  }, 1000);
+});
+
+test.serial.cb('It should scroll to target element', (t) => {
   const inst = new MoveTo();
   const elem = createMockDomElement({offsetTop: 1500});
 

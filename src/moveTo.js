@@ -104,7 +104,7 @@ const MoveTo = (() => {
     /**
      * Move
      * Scrolls to given element by using easeOutQuart function
-     * @param  {HTMLElement} target Target element to be scrolled
+     * @param  {HTMLElement|Number} target Target element to be scrolled or target position
      * @param  {Object} options Custom options
      */
     move(target, options = {}) {
@@ -114,7 +114,7 @@ const MoveTo = (() => {
 
       options = mergeObject(this.options, options);
 
-      let to = getOffsetSum(target).top;
+      let to = typeof target === 'number' ? target : getOffsetSum(target).top;
       const from = window.pageYOffset;
       to -= options.tolerance;
       const change = to - from;
