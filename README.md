@@ -81,7 +81,7 @@ npm test tests/**
 
 ## Browser Support
 
-Preparing...
+It should work in the current stable releases of Chrome, Firefox, Safari as well as IE9 and up.
 
 ## License
 
