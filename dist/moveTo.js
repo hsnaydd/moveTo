@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight, smooth scrolling javascript library without any dependency.
- * Version 1.0.1 (13-03-2017 12:35)
+ * Version 1.1.0 (13-03-2017 14:29)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -111,7 +111,7 @@ var MoveTo = function () {
       /**
          * Move
          * Scrolls to given element by using easeOutQuart function
-         * @param  {HTMLElement} target Target element to be scrolled
+         * @param  {HTMLElement|Number} target Target element to be scrolled or target position
          * @param  {Object} options Custom options
          */ }, { key: 'move', value: function move(
       target) {var _this2 = this;var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -121,7 +121,7 @@ var MoveTo = function () {
 
         options = mergeObject(this.options, options);
 
-        var to = getOffsetSum(target).top;
+        var to = typeof target === 'number' ? target : getOffsetSum(target).top;
         var from = window.pageYOffset;
         to -= options.tolerance;
         var change = to - from;

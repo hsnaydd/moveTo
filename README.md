@@ -46,6 +46,20 @@ Trigger HTML markup
 
 ## API
 
+### move(target, options)
+
+Scrolls to target
+
+#### target
+Type: HTMLElement|Number
+
+Target element/position to be scrolled. Target position is the distance to the top of the page
+
+#### options
+Type: Object
+
+Pass custom options
+
 ### addEaseFunction(name, fn)
 
 Adds custom ease function
