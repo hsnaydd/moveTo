@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight, smooth scrolling javascript library without any dependency.
- * Version 1.0.0 (13-03-2017 12:29)
+ * Version 1.0.1 (13-03-2017 12:35)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -18,7 +18,7 @@ var MoveTo = function () {
 
 
   /**
-                         * outQuart Easing Fonksiyonu
+                         * outQuart Easing Function
                          * @param  {Integer} t - current time
                          * @param  {Integer} b - start value
                          * @param  {Integer} c - change in value
@@ -130,7 +130,7 @@ var MoveTo = function () {
         var lastPageYOffset = 0;
 
         /*
-                                  * Scroll Animasyon Fonkstionu
+                                  * Scroll Animation Function
                                   */
         var animate = function animate() {
           var currentPageYOffset = window.pageYOffset;
