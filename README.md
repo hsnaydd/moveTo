@@ -9,6 +9,12 @@ Using NPM
 npm install moveTo --save
 ```
 
+Using Yarn
+
+```sh
+yarn add moveTo
+```
+
 Using Bower
 
 ```sh
@@ -57,8 +63,11 @@ Ease function. See [easing.js](https://gist.github.com/gre/1650294) for more eas
 ## Development setup
 
 ```sh
-
 // To install dev dependencies run:
+
+yarn
+
+// or
 
 npm install
 
@@ -75,6 +84,10 @@ gulp scripts:lint
 gulp build
 
 // To run tests
+
+yarn test tests/**
+
+// or
 
 npm test tests/**
 ```
