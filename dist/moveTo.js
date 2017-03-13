@@ -1,6 +1,6 @@
 /*!
- * MoveTo - Simple and lightweight javascript library for smooth scrolling to element.
- * Version 1.0.0 (13-03-2017 11:23)
+ * MoveTo - A lightweight, smooth scrolling javascript library without any dependency.
+ * Version 1.0.0 (13-03-2017 12:29)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -191,5 +191,8 @@ var MoveTo = function () {
   return MoveTo;
 }();
 
-window.moveTo = MoveTo;
-module.exports = MoveTo;
+if (typeof module !== 'undefined') {
+  module.exports = MoveTo;
+} else {
+  window.moveTo = MoveTo;
+}
