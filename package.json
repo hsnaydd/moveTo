@@ -2,7 +2,7 @@
   "name": "moveto",
   "version": "1.0.0",
   "description": "Simple and lightweight javascript library for smooth scrolling to element, It has no dependency.",
-  "main": "dist/moveTo.js",
+  "main": "src/moveTo.js",
   "scripts": {
     "test": "ava"
   },
@@ -16,7 +16,9 @@
     "scroll",
     "animated",
     "scrolling",
-    "animation"
+    "animation",
+    "smooth",
+    "smoothscroll"
   ],
   "author": "Hasan Aydoğdu <hsnaydd@gmail.com>",
   "license": "MIT",
