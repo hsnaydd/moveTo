@@ -32,7 +32,7 @@ test('It should set defaults', (t) => {
   const inst = new MoveTo();
   t.not(inst.options.tolerance, undefined);
   t.not(inst.options.duration, undefined);
-  t.not(inst.options.easeFunctionName, undefined);
+  t.not(inst.options.ease, undefined);
 });
 
 test('It should change options', (t) => {
