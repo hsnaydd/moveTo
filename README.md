@@ -17,7 +17,7 @@ bower install moveTo --save
 
 ## Usage
 
-```
+```js
 const moveTo = new MoveTo();
 
 const target = document.getElementById('target');
