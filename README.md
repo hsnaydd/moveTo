@@ -39,7 +39,7 @@ moveTo.registerTrigger(trigger);
 
 ```
 
-### Import
+### Import
 
 You can also use it as an ES2015 module;
 
