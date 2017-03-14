@@ -55,15 +55,15 @@ The default options are as follows:
 new MoveTo({
   tolerance: 0,
   duration: 800,
-  ease: 'outQuart'
+  easing: 'outQuart'
 })
 ```
 
-| Option    | Default  | Desctiption                                                              |
-|-----------|----------|--------------------------------------------------------------------------|
-| tolerance | 0        | The tolerance of the target to be scrolled, can be negative or positive. |
-| duration  | 800      | Duration of scrolling, in milliseconds.                                  |
-| ease      | outQuart | Ease function name                                                       |
+| Option    | Default      | Desctiption                                                              |
+|-----------|--------------|--------------------------------------------------------------------------|
+| tolerance | 0            | The tolerance of the target to be scrolled, can be negative or positive. |
+| duration  | 800          | Duration of scrolling, in milliseconds.                                  |
+| easing    | easeOutQuart | Ease function name                                                       |
 
 ## API
 
@@ -103,18 +103,18 @@ Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more
   ```js
   document.addEventListener('DOMContentLoaded', function(){
     const easeFunctions = {
-      inQuad: function (t, b, c, d) {
+      easeInQuad: function (t, b, c, d) {
         t /= d;
         return c * t * t + b;
       },
-      outQuad: function (t, b, c, d) {
+      easeOutQuad: function (t, b, c, d) {
         t /= d;
         return -c * t* (t - 2) + b;
       }
     }
     const moveTo = new MoveTo({
       duration: 1000,
-      ease: 'inQuad'
+      easing: 'inQuad'
     }, easeFunctions);
     const trigger = document.getElementsByClassName('js-trigger')[0];
     moveTo.registerTrigger(trigger);
@@ -148,11 +148,11 @@ gulp build
 
 # To run tests
 
-yarn test tests/**
+yarn test
 
 # or
 
-npm test tests/**
+npm test
 ```
 
 ## Browser Support
