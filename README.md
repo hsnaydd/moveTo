@@ -93,30 +93,30 @@ Type: function
 
 Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more ease function.
 
-## Examples
+## Examples
 
 <details>
   <summary>Pass ease function(s) when creating instance</summary>
-```js
-document.addEventListener('DOMContentLoaded', function(){
-  const easeFunctions = {
-    inQuad: function (t, b, c, d) {
-      t /= d;
-      return c * t * t + b;
-    },
-    outQuad: function (t, b, c, d) {
-      t /= d;
-      return -c * t* (t - 2) + b;
+  ```js
+  document.addEventListener('DOMContentLoaded', function(){
+    const easeFunctions = {
+      inQuad: function (t, b, c, d) {
+        t /= d;
+        return c * t * t + b;
+      },
+      outQuad: function (t, b, c, d) {
+        t /= d;
+        return -c * t* (t - 2) + b;
+      }
     }
-  }
-  const moveTo = new MoveTo({
-    duration: 1000,
-    ease: 'inQuad'
-  }, easeFunctions);
-  const trigger = document.getElementsByClassName('js-trigger')[0];
-  moveTo.registerTrigger(trigger);
-});
-```
+    const moveTo = new MoveTo({
+      duration: 1000,
+      ease: 'inQuad'
+    }, easeFunctions);
+    const trigger = document.getElementsByClassName('js-trigger')[0];
+    moveTo.registerTrigger(trigger);
+  });
+  ```
 </details>
 
 ## Development setup
