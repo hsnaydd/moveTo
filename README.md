@@ -69,7 +69,7 @@ new MoveTo({
 
 Scrolls to target
 
-#### target
+### target
 Type: HTMLElement|Number
 
 Target element/position to be scrolled. Target position is the distance to the top of the page
