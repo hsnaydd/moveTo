@@ -55,7 +55,7 @@ The default options are as follows:
 new MoveTo({
   tolerance: 0,
   duration: 800,
-  easing: 'outQuart'
+  easing: 'easeOutQuart'
 })
 ```
 
