@@ -45,6 +45,24 @@ Trigger HTML markup
   <a href="#target" class="js-trigger" data-duration="300">Trigger</a>
 ```
 
+## Options
+
+The default options are as follows:
+
+```js
+new MoveTo({
+  tolerance: 0,
+  duration: 800,
+  ease: 'outQuart'
+})
+```
+
+| Option    | Desctiption                                                              |
+|-----------|--------------------------------------------------------------------------|
+| tolerance | The tolerance of the target to be scrolled, can be negative or positive. |
+| duration  | Duration of scrolling, in milliseconds.                                  |
+| ease      | Ease function name                                                       |
+
 ## API
 
 ### move(target, options)
