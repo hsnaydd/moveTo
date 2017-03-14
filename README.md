@@ -39,21 +39,7 @@ moveTo.registerTrigger(trigger);
 
 ```
 
-### Import
-
-You can also use it as an ES2015 module;
-
-> Naming may vary depending on your preference, it will be as follows with the use of NPM
-
-```js
-import MoveToo from 'moveTo';
-
-const instance = new MoveTo();
-instance.move(500);
-
-```
-
-### Trigger HTML markup
+Trigger HTML markup
 
 ```html
   <a href="#target" class="js-trigger" data-duration="300">Trigger</a>
