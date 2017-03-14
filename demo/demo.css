@@ -1,0 +1,68 @@
+body {
+  background-color: #f1f3f5;
+}
+
+.c-section {
+  min-height: 100vh;
+  padding: 15px;
+}
+
+.c-section--primary {
+  background-color: #dee2e6;
+  color: #212529;
+}
+
+.c-section--secondary {
+  margin-top: 100vh;
+}
+
+.c-section__btn {
+  cursor: pointer;
+  background-color: #12b886;
+  border: 0;
+  color: white;
+}
+
+.c-section__btn:hover,
+.c-section__btn:focus {
+  background-color: #0ca678;
+  color: white;
+  box-shadow: none;
+}
+
+.c-section > .lead {
+  color: #868e96;
+}
+
+.c-section__link {
+  color: #495057;
+}
+
+.c-section__link:hover {
+  color: #12b886;
+}
+
+.c-section__footer {
+  color: #868e96;
+}
+
+.github-corner {
+  display: inline-block;
+  fill: #12b886;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.github-corner:hover {
+  color: white;
+}
+
+.u-flex-extend {
+  -webkit-box-flex: 1;
+    -ms-flex: 1;
+        flex: 1
+}
