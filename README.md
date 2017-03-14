@@ -57,11 +57,11 @@ new MoveTo({
 })
 ```
 
-| Option    | Desctiption                                                              |
-|-----------|--------------------------------------------------------------------------|
-| tolerance | The tolerance of the target to be scrolled, can be negative or positive. |
-| duration  | Duration of scrolling, in milliseconds.                                  |
-| ease      | Ease function name                                                       |
+| Option    | Default  | Desctiption                                                              |
+|-----------|----------|--------------------------------------------------------------------------|
+| tolerance | 0        | The tolerance of the target to be scrolled, can be negative or positive. |
+| duration  | 800      | Duration of scrolling, in milliseconds.                                  |
+| ease      | outQuart | Ease function name                                                       |
 
 ## API
 
@@ -118,7 +118,7 @@ Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more
     moveTo.registerTrigger(trigger);
   });
   ```
-  
+
 </details>
 
 ## Development setup
