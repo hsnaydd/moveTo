@@ -91,7 +91,7 @@ Ease function name
 #### fn
 Type: function
 
-Ease function. See [easing.js](https://gist.github.com/gre/1650294) for more ease function.
+Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more ease function.
 
 ## Development setup
 
