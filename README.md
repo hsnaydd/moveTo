@@ -97,6 +97,7 @@ Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more
 
 <details>
   <summary>Pass ease function(s) when creating instance</summary>
+
   ```js
   document.addEventListener('DOMContentLoaded', function(){
     const easeFunctions = {
@@ -117,6 +118,7 @@ Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more
     moveTo.registerTrigger(trigger);
   });
   ```
+  
 </details>
 
 ## Development setup
