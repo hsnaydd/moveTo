@@ -67,6 +67,18 @@ const MoveTo = (() => {
   };
 
   /**
+   * Converts camel case to kebab case
+   * @param  {string} val the value to be converted
+   * @return {String} the converted value
+   */
+  function kebabCase(val) {
+    return val.replace(/([A-Z])/g, function($1) {
+      return '-' + $1.toLowerCase();
+    });
+  };
+
+
+  /**
    * Scrolls to an element
    */
   class MoveTo {
@@ -93,7 +105,7 @@ const MoveTo = (() => {
       const href = dom.getAttribute('href');
       // The element to be scrolled
       const target = href && document.getElementById(href.substring(1));
-      const options = mergeObject(this.options, _getOptionsFromTriggerDom(dom));
+      const options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
 
       dom.addEventListener('click', (e) => {
         e.preventDefault();
@@ -162,23 +174,19 @@ const MoveTo = (() => {
   /**
    * Returns options which created from trigger dom element
    * @param  {HTMLElement} dom Trigger dom element
+   * @param  {Object} options The instance's options
    * @return {Object} The options which created from trigger dom element
    */
-  function _getOptionsFromTriggerDom(dom) {
-    const options = {};
-    const optionsMap = {
-      'tolerance': 'tolerance',
-      'duration': 'duration',
-      'ease': 'ease-function-name'
-    };
+  function _getOptionsFromTriggerDom(dom, options) {
+    const domOptions = {};
 
-    Object.keys(optionsMap).forEach((key) => {
-      let value = dom.getAttribute(`data-${optionsMap[key]}`);
+    Object.keys(options).forEach((key) => {
+      let value = dom.getAttribute(`data-${kebabCase(key)}`);
       if (value) {
-        options[key] = value;
+        domOptions[key] = value;
       }
     });
-    return options;
+    return domOptions;
   }
 
   return MoveTo;

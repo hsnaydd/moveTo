@@ -22,7 +22,7 @@ var browserSyncConfigs = {
 
 var banner = [
   '/*!',
-  ' * MoveTo - A lightweight, smooth scrolling javascript library without any dependency.',
+  ' * MoveTo - ' - pkg.description,
   ' * Version ' + pkg.version + ' (' + today + ')',
   ' * Licensed under ' + pkg.license,
   ' * Copyright ' + $.util.date('yyyy') + ' ' + pkg.author,
