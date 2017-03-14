@@ -4,7 +4,7 @@
   "description": "A lightweight, smooth scrolling javascript library without any dependency.",
   "main": "src/moveTo.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava tests/**"
   },
   "repository": {
     "type": "git",
