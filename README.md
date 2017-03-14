@@ -1,4 +1,5 @@
-# MoveTo
+# MoveTo [![npm version](https://badge.fury.io/js/moveto.svg)](https://badge.fury.io/js/moveto) [![Bower version](https://badge.fury.io/bo/moveTo.svg)](https://badge.fury.io/bo/moveTo) [![Build Status](https://travis-ci.org/hsnaydd/moveTo.svg?branch=master)](https://travis-ci.org/hsnaydd/moveTo.js)
+
 A lightweight, smooth scrolling javascript library without any dependency.
 
 ## Installation
