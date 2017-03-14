@@ -148,11 +148,11 @@ gulp build
 
 # To run tests
 
-yarn test tests/**
+yarn test
 
 # or
 
-npm test tests/**
+npm test
 ```
 
 ## Browser Support
