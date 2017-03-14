@@ -41,8 +41,10 @@ moveTo.registerTrigger(trigger);
 
 Trigger HTML markup
 
+> You can pass all options as data attributes with `mt` prefix. Option name should be written in kebab case format.
+
 ```html
-  <a href="#target" class="js-trigger" data-duration="300">Trigger</a>
+  <a href="#target" class="js-trigger" data-mt-duration="300">Trigger</a>
 ```
 
 ## Options
@@ -57,11 +59,11 @@ new MoveTo({
 })
 ```
 
-| Option    | Description                                                              |
-|-----------|--------------------------------------------------------------------------|
-| tolerance | The tolerance of the target to be scrolled, can be negative or positive. |
-| duration  | Duration of scrolling, in milliseconds.                                  |
-| ease      | Ease function name                                                       |
+| Option    | Default  | Desctiption                                                              |
+|-----------|----------|--------------------------------------------------------------------------|
+| tolerance | 0        | The tolerance of the target to be scrolled, can be negative or positive. |
+| duration  | 800      | Duration of scrolling, in milliseconds.                                  |
+| ease      | outQuart | Ease function name                                                       |
 
 ## API
 
@@ -69,7 +71,7 @@ new MoveTo({
 
 Scrolls to target
 
-#### target
+### target
 Type: HTMLElement|Number
 
 Target element/position to be scrolled. Target position is the distance to the top of the page
@@ -91,7 +93,35 @@ Ease function name
 #### fn
 Type: function
 
-Ease function. See [easing.js](https://gist.github.com/gre/1650294) for more ease function.
+Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more ease function.
+
+## Examples
+
+<details>
+  <summary>Pass ease function(s) when creating instance</summary>
+
+  ```js
+  document.addEventListener('DOMContentLoaded', function(){
+    const easeFunctions = {
+      inQuad: function (t, b, c, d) {
+        t /= d;
+        return c * t * t + b;
+      },
+      outQuad: function (t, b, c, d) {
+        t /= d;
+        return -c * t* (t - 2) + b;
+      }
+    }
+    const moveTo = new MoveTo({
+      duration: 1000,
+      ease: 'inQuad'
+    }, easeFunctions);
+    const trigger = document.getElementsByClassName('js-trigger')[0];
+    moveTo.registerTrigger(trigger);
+  });
+  ```
+
+</details>
 
 ## Development setup
 

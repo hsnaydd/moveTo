@@ -181,7 +181,7 @@ const MoveTo = (() => {
     const domOptions = {};
 
     Object.keys(options).forEach((key) => {
-      let value = dom.getAttribute(`data-${kebabCase(key)}`);
+      let value = dom.getAttribute(`data-mt-${kebabCase(key)}`);
       if (value) {
         domOptions[key] = value;
       }
