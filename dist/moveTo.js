@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight, smooth scrolling javascript library without any dependency.
- * Version 1.1.0 (13-03-2017 14:29)
+ * Version 1.2.0 (14-03-2017 17:27)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -74,6 +74,18 @@ var MoveTo = function () {
   };
 
   /**
+      * Converts camel case to kebab case
+      * @param  {string} val the value to be converted
+      * @return {String} the converted value
+      */
+  function kebabCase(val) {
+    return val.replace(/([A-Z])/g, function ($1) {
+      return '-' + $1.toLowerCase();
+    });
+  };
+
+
+  /**
       * Scrolls to an element
       */var
   MoveTo = function () {
@@ -100,7 +112,7 @@ var MoveTo = function () {
         var href = dom.getAttribute('href');
         // The element to be scrolled
         var target = href && document.getElementById(href.substring(1));
-        var options = mergeObject(this.options, _getOptionsFromTriggerDom(dom));
+        var options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
 
         dom.addEventListener('click', function (e) {
           e.preventDefault();
@@ -169,23 +181,19 @@ var MoveTo = function () {
   /**
                                 * Returns options which created from trigger dom element
                                 * @param  {HTMLElement} dom Trigger dom element
+                                * @param  {Object} options The instance's options
                                 * @return {Object} The options which created from trigger dom element
                                 */
-  function _getOptionsFromTriggerDom(dom) {
-    var options = {};
-    var optionsMap = {
-      'tolerance': 'tolerance',
-      'duration': 'duration',
-      'ease': 'ease-function-name' };
+  function _getOptionsFromTriggerDom(dom, options) {
+    var domOptions = {};
 
-
-    Object.keys(optionsMap).forEach(function (key) {
-      var value = dom.getAttribute('data-' + optionsMap[key]);
+    Object.keys(options).forEach(function (key) {
+      var value = dom.getAttribute('data-mt-' + kebabCase(key));
       if (value) {
-        options[key] = value;
+        domOptions[key] = value;
       }
     });
-    return options;
+    return domOptions;
   }
 
   return MoveTo;

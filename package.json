@@ -1,6 +1,6 @@
 {
   "name": "moveto",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A lightweight, smooth scrolling javascript library without any dependency.",
   "main": "src/moveTo.js",
   "scripts": {
