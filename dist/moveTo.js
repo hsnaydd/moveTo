@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight, smooth scrolling javascript library without any dependency.
- * Version 1.2.0 (14-03-2017 17:27)
+ * Version 1.3.0 (14-03-2017 23:28)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -14,17 +14,17 @@ var MoveTo = function () {
   var defaults = {
     tolerance: 0,
     duration: 800,
-    ease: 'outQuart' };
+    easing: 'easeOutQuart' };
 
 
   /**
-                         * outQuart Easing Function
-                         * @param  {Integer} t - current time
-                         * @param  {Integer} b - start value
-                         * @param  {Integer} c - change in value
-                         * @param  {Integer} d - duration
-                         * @return {Integer} - calculated value
-                         */
+                               * easeOutQuart Easing Function
+                               * @param  {Integer} t - current time
+                               * @param  {Integer} b - start value
+                               * @param  {Integer} c - change in value
+                               * @param  {Integer} d - duration
+                               * @return {Integer} - calculated value
+                               */
   function easeOutQuart(t, b, c, d) {
     t /= d;
     t--;
@@ -97,7 +97,7 @@ var MoveTo = function () {
                          */
     function MoveTo() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};var easeFunctions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};_classCallCheck(this, MoveTo);
       this.options = mergeObject(defaults, options);
-      this.easeFunctions = mergeObject({ outQuart: easeOutQuart }, easeFunctions);
+      this.easeFunctions = mergeObject({ easeOutQuart: easeOutQuart }, easeFunctions);
     }
 
     /**
@@ -127,8 +127,8 @@ var MoveTo = function () {
          * @param  {Object} options Custom options
          */ }, { key: 'move', value: function move(
       target) {var _this2 = this;var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        if (!target) {
-          return;
+        if (target !== 0 && !target) {
+          target = 0;
         }
 
         options = mergeObject(this.options, options);
@@ -157,7 +157,7 @@ var MoveTo = function () {
           }
           lastPageYOffset = currentPageYOffset;
           currentTime += increment;
-          var val = _this2.easeFunctions[options.ease](
+          var val = _this2.easeFunctions[options.easing](
           currentTime, from, change, options.duration);
 
           window.scroll(0, val);
