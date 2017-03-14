@@ -120,8 +120,8 @@ const MoveTo = (() => {
      * @param  {Object} options Custom options
      */
     move(target, options = {}) {
-      if (!target) {
-        return;
+      if (target !== 0 && !target) {
+        target = 0;
       }
 
       options = mergeObject(this.options, options);
