@@ -32,24 +32,24 @@ test('It should set defaults', (t) => {
   const inst = new MoveTo();
   t.not(inst.options.tolerance, undefined);
   t.not(inst.options.duration, undefined);
-  t.not(inst.options.ease, undefined);
+  t.not(inst.options.easing, undefined);
 });
 
 test('It should pass ease function(s) when creating instance', (t) => {
   const easeFunctions = {
-    inQuad: function(t, b, c, d) {
+    easeInQuad: function(t, b, c, d) {
       t /= d;
       return c * t * t + b;
     },
-    outQuad: function(t, b, c, d) {
+    easeOutQuad: function(t, b, c, d) {
       t /= d;
       return -c * t* (t - 2) + b;
     }
   };
   const inst = new MoveTo({}, easeFunctions);
 
-  t.not(inst.easeFunctions['inQuad'], undefined);
-  t.not(inst.easeFunctions['outQuad'], undefined);
+  t.not(inst.easeFunctions['easeInQuad'], undefined);
+  t.not(inst.easeFunctions['easeOutQuad'], undefined);
 });
 
 test('It should change options', (t) => {

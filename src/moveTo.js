@@ -7,11 +7,11 @@ const MoveTo = (() => {
   const defaults = {
     tolerance: 0,
     duration: 800,
-    ease: 'outQuart',
+    easing: 'easeOutQuart',
   };
 
   /**
-   * outQuart Easing Function
+   * easeOutQuart Easing Function
    * @param  {Integer} t - current time
    * @param  {Integer} b - start value
    * @param  {Integer} c - change in value
@@ -90,7 +90,7 @@ const MoveTo = (() => {
      */
     constructor(options = {}, easeFunctions = {}) {
       this.options = mergeObject(defaults, options);
-      this.easeFunctions = mergeObject({outQuart: easeOutQuart}, easeFunctions);
+      this.easeFunctions = mergeObject({easeOutQuart}, easeFunctions);
     }
 
     /**
@@ -150,7 +150,7 @@ const MoveTo = (() => {
         }
         lastPageYOffset = currentPageYOffset;
         currentTime += increment;
-        const val = this.easeFunctions[options.ease](
+        const val = this.easeFunctions[options.easing](
           currentTime, from, change, options.duration
         );
         window.scroll(0, val);
