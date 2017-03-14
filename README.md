@@ -41,8 +41,10 @@ moveTo.registerTrigger(trigger);
 
 Trigger HTML markup
 
+> You can pass all options as data attributes with `mt` prefix. Option name should be written in kebab case format.
+
 ```html
-  <a href="#target" class="js-trigger" data-duration="300">Trigger</a>
+  <a href="#target" class="js-trigger" data-mt-duration="300">Trigger</a>
 ```
 
 ## Options
