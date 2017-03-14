@@ -114,7 +114,7 @@ Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more
     }
     const moveTo = new MoveTo({
       duration: 1000,
-      easing: 'inQuad'
+      easing: 'easeInQuad'
     }, easeFunctions);
     const trigger = document.getElementsByClassName('js-trigger')[0];
     moveTo.registerTrigger(trigger);
