@@ -57,7 +57,7 @@ new MoveTo({
 })
 ```
 
-| Option    | Desctiption                                                              |
+| Option    | Description                                                              |
 |-----------|--------------------------------------------------------------------------|
 | tolerance | The tolerance of the target to be scrolled, can be negative or positive. |
 | duration  | Duration of scrolling, in milliseconds.                                  |
