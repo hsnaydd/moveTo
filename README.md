@@ -61,11 +61,12 @@ new MoveTo({
 })
 ```
 
-| Option    | Default      | Desctiption                                                              |
-|-----------|--------------|--------------------------------------------------------------------------|
-| tolerance | 0            | The tolerance of the target to be scrolled, can be negative or positive. |
-| duration  | 800          | Duration of scrolling, in milliseconds.                                  |
-| easing    | easeOutQuart | Ease function name                                                       |
+| Option    | Default      | Desctiption                                                                          |
+|-----------|--------------|--------------------------------------------------------------------------------------|
+| tolerance | 0            | The tolerance of the target to be scrolled, can be negative or positive.             |
+| duration  | 800          | Duration of scrolling, in milliseconds.                                              |
+| easing    | easeOutQuart | Ease function name                                                                   |
+| callback  | noop         | The function to be run after scrolling complete. Target passes as the first argument |
 
 ## API
 
@@ -73,7 +74,7 @@ new MoveTo({
 
 Scrolls to target
 
-### target
+#### target
 Type: HTMLElement|Number
 
 Target element/position to be scrolled. Target position is the distance to the top of the page
@@ -83,17 +84,28 @@ Type: Object
 
 Pass custom options
 
+### registerTrigger(trigger, callback)
+
+#### trigger
+Type: HTMLElement
+
+This is the trigger element for starting to scroll when on click.
+
+#### callback
+
+This is the callback function to be run after the scroll complete. This will overwrite the callback option.
+
 ### addEaseFunction(name, fn)
 
 Adds custom ease function
 
 #### name
-Type: string
+Type: String
 
 Ease function name
 
 #### fn
-Type: function
+Type: Function
 
 Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more ease function.
 
@@ -120,6 +132,36 @@ Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more
     }, easeFunctions);
     const trigger = document.getElementsByClassName('js-trigger')[0];
     moveTo.registerTrigger(trigger);
+  });
+  ```
+
+</details>
+
+<details>
+  <summary>Working with callback function</summary>
+
+  ```js
+  document.addEventListener('DOMContentLoaded', function(){
+    const moveTo = new MoveTo({
+      duration: 1000,
+      callback: function(target) {
+        // This will run if there is no overwrite
+      }
+    });
+    const trigger = document.getElementsByClassName('js-trigger')[0];
+
+    moveTo.registerTrigger(trigger, function(target) {
+      // overwrites global callback
+    });
+
+    // or
+
+    moveTo.move(1200, {
+      duration: 500,
+      callback: function() {
+        // overwrites global callback
+      }
+    });
   });
   ```
 

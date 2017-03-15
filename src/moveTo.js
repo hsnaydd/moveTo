@@ -8,6 +8,7 @@ const MoveTo = (() => {
     tolerance: 0,
     duration: 800,
     easing: 'easeOutQuart',
+    callback: function() {},
   };
 
   /**
@@ -96,16 +97,23 @@ const MoveTo = (() => {
     /**
      * Register a dom element as trigger
      * @param  {HTMLElement} dom Dom trigger element
+     * @param  {Function} callback Callback function
      */
-    registerTrigger(dom) {
+    registerTrigger(dom, callback) {
       if (!dom) {
         return;
       }
 
       const href = dom.getAttribute('href');
       // The element to be scrolled
-      const target = href && document.getElementById(href.substring(1));
+      const target = (href && href !== '#')
+        ? document.getElementById(href.substring(1))
+        : 0;
       const options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
+
+      if (typeof callback === 'function') {
+        options.callback = callback;
+      }
 
       dom.addEventListener('click', (e) => {
         e.preventDefault();
@@ -121,7 +129,7 @@ const MoveTo = (() => {
      */
     move(target, options = {}) {
       if (target !== 0 && !target) {
-        target = 0;
+        return;
       }
 
       options = mergeObject(this.options, options);
@@ -145,7 +153,7 @@ const MoveTo = (() => {
             (change > 0 && lastPageYOffset > currentPageYOffset) ||
             (change < 0 && lastPageYOffset < currentPageYOffset)
           ) {
-            return;
+            return options.callback(target);
           }
         }
         lastPageYOffset = currentPageYOffset;
@@ -156,6 +164,8 @@ const MoveTo = (() => {
         window.scroll(0, val);
         if (currentTime < options.duration) {
           setTimeout(animate, increment);
+        } else {
+          options.callback(target);
         }
       };
       animate();
@@ -183,7 +193,7 @@ const MoveTo = (() => {
     Object.keys(options).forEach((key) => {
       let value = dom.getAttribute(`data-mt-${kebabCase(key)}`);
       if (value) {
-        domOptions[key] = value;
+        domOptions[key] = isNaN(value) ? value : parseInt(value, 10);
       }
     });
     return domOptions;

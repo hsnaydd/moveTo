@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight, smooth scrolling javascript library without any dependency.
- * Version 1.3.0 (14-03-2017 23:28)
+ * Version 1.4.0 (15-03-2017 12:40)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -14,17 +14,18 @@ var MoveTo = function () {
   var defaults = {
     tolerance: 0,
     duration: 800,
-    easing: 'easeOutQuart' };
+    easing: 'easeOutQuart',
+    callback: function callback() {} };
 
 
   /**
-                               * easeOutQuart Easing Function
-                               * @param  {Integer} t - current time
-                               * @param  {Integer} b - start value
-                               * @param  {Integer} c - change in value
-                               * @param  {Integer} d - duration
-                               * @return {Integer} - calculated value
-                               */
+                                         * easeOutQuart Easing Function
+                                         * @param  {Integer} t - current time
+                                         * @param  {Integer} b - start value
+                                         * @param  {Integer} c - change in value
+                                         * @param  {Integer} d - duration
+                                         * @return {Integer} - calculated value
+                                         */
   function easeOutQuart(t, b, c, d) {
     t /= d;
     t--;
@@ -103,16 +104,23 @@ var MoveTo = function () {
     /**
        * Register a dom element as trigger
        * @param  {HTMLElement} dom Dom trigger element
+       * @param  {Function} callback Callback function
        */_createClass(MoveTo, [{ key: 'registerTrigger', value: function registerTrigger(
-      dom) {var _this = this;
+      dom, callback) {var _this = this;
         if (!dom) {
           return;
         }
 
         var href = dom.getAttribute('href');
         // The element to be scrolled
-        var target = href && document.getElementById(href.substring(1));
+        var target = href && href !== '#' ?
+        document.getElementById(href.substring(1)) :
+        0;
         var options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
+
+        if (typeof callback === 'function') {
+          options.callback = callback;
+        }
 
         dom.addEventListener('click', function (e) {
           e.preventDefault();
@@ -128,7 +136,7 @@ var MoveTo = function () {
          */ }, { key: 'move', value: function move(
       target) {var _this2 = this;var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         if (target !== 0 && !target) {
-          target = 0;
+          return;
         }
 
         options = mergeObject(this.options, options);
@@ -152,7 +160,7 @@ var MoveTo = function () {
             change > 0 && lastPageYOffset > currentPageYOffset ||
             change < 0 && lastPageYOffset < currentPageYOffset)
             {
-              return;
+              return options.callback(target);
             }
           }
           lastPageYOffset = currentPageYOffset;
@@ -163,6 +171,8 @@ var MoveTo = function () {
           window.scroll(0, val);
           if (currentTime < options.duration) {
             setTimeout(animate, increment);
+          } else {
+            options.callback(target);
           }
         };
         animate();
@@ -190,7 +200,7 @@ var MoveTo = function () {
     Object.keys(options).forEach(function (key) {
       var value = dom.getAttribute('data-mt-' + kebabCase(key));
       if (value) {
-        domOptions[key] = value;
+        domOptions[key] = isNaN(value) ? value : parseInt(value, 10);
       }
     });
     return domOptions;
