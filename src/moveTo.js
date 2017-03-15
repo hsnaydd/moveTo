@@ -193,7 +193,7 @@ const MoveTo = (() => {
     Object.keys(options).forEach((key) => {
       let value = dom.getAttribute(`data-mt-${kebabCase(key)}`);
       if (value) {
-        domOptions[key] = value;
+        domOptions[key] = isNaN(value) ? value : parseInt(value, 10);
       }
     });
     return domOptions;
