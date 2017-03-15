@@ -8,6 +8,7 @@ const MoveTo = (() => {
     tolerance: 0,
     duration: 800,
     easing: 'easeOutQuart',
+    callback: function() {},
   };
 
   /**
@@ -96,8 +97,9 @@ const MoveTo = (() => {
     /**
      * Register a dom element as trigger
      * @param  {HTMLElement} dom Dom trigger element
+     * @param  {Function} callback Callback function
      */
-    registerTrigger(dom) {
+    registerTrigger(dom, callback) {
       if (!dom) {
         return;
       }
@@ -108,6 +110,10 @@ const MoveTo = (() => {
         ? document.getElementById(href.substring(1))
         : 0;
       const options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
+
+      if (typeof callback === 'function') {
+        options.callback = callback;
+      }
 
       dom.addEventListener('click', (e) => {
         e.preventDefault();
@@ -147,7 +153,7 @@ const MoveTo = (() => {
             (change > 0 && lastPageYOffset > currentPageYOffset) ||
             (change < 0 && lastPageYOffset < currentPageYOffset)
           ) {
-            return;
+            return options.callback(target);
           }
         }
         lastPageYOffset = currentPageYOffset;
@@ -158,6 +164,8 @@ const MoveTo = (() => {
         window.scroll(0, val);
         if (currentTime < options.duration) {
           setTimeout(animate, increment);
+        } else {
+          options.callback(target);
         }
       };
       animate();

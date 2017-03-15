@@ -33,6 +33,7 @@ test('It should set defaults', (t) => {
   t.not(inst.options.tolerance, undefined);
   t.not(inst.options.duration, undefined);
   t.not(inst.options.easing, undefined);
+  t.not(inst.options.callback, undefined);
 });
 
 test('It should pass ease function(s) when creating instance', (t) => {
