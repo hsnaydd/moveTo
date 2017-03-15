@@ -104,7 +104,9 @@ const MoveTo = (() => {
 
       const href = dom.getAttribute('href');
       // The element to be scrolled
-      const target = href && document.getElementById(href.substring(1));
+      const target = (href && href !== '#')
+        ? document.getElementById(href.substring(1))
+        : 0;
       const options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
 
       dom.addEventListener('click', (e) => {
@@ -121,7 +123,7 @@ const MoveTo = (() => {
      */
     move(target, options = {}) {
       if (target !== 0 && !target) {
-        target = 0;
+        return;
       }
 
       options = mergeObject(this.options, options);
