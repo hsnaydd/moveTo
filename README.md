@@ -87,7 +87,7 @@ Pass custom options
 #### trigger
 Type: HTMLElement
 
-This is the element trigger element for starting to scroll.
+This is the trigger element for starting to scroll when on click.
 
 #### callback
 
@@ -98,12 +98,12 @@ This is the callback function to be run after the scroll complete. This will ove
 Adds custom ease function
 
 #### name
-Type: string
+Type: String
 
 Ease function name
 
 #### fn
-Type: function
+Type: Function
 
 Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more ease function.
 
