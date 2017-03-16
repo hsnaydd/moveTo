@@ -104,7 +104,7 @@ const MoveTo = (() => {
         return;
       }
 
-      const href = dom.getAttribute('href');
+      const href = dom.getAttribute('href') || dom.getAttribute('data-target');
       // The element to be scrolled
       const target = (href && href !== '#')
         ? document.getElementById(href.substring(1))
