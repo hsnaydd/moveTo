@@ -45,6 +45,10 @@ Trigger HTML markup
 
 ```html
   <a href="#target" class="js-trigger" data-mt-duration="300">Trigger</a>
+
+  <!-- or -->
+
+  <button type="button" class="js-trigger" data-target="#target" data-mt-duration="300">Trigger</button>
 ```
 
 ## Options
