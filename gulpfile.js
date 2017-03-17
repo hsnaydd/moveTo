@@ -1,18 +1,18 @@
 'use strict';
 
-var gulp = require('gulp');
-var del = require('del');
-var runSequence = require('run-sequence');
-var browserSync = require('browser-sync');
-var gulpLoadPlugins =  require('gulp-load-plugins');
-var lazypipe = require('lazypipe');
+const gulp = require('gulp');
+const del = require('del');
+const runSequence = require('run-sequence');
+const browserSync = require('browser-sync');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const lazypipe = require('lazypipe');
 
-var $ = gulpLoadPlugins();
-var reload = browserSync.reload;
-var pkg = require('./package.json');
-var today = $.util.date('dd-mm-yyyy HH:MM');
+const $ = gulpLoadPlugins();
+const reload = browserSync.reload;
+const pkg = require('./package.json');
+const today = $.util.date('dd-mm-yyyy HH:MM');
 
-var browserSyncConfigs = {
+const browserSyncConfigs = {
   notify: false,
   // Disable open automatically when Browsersync starts.
   open: false,
@@ -20,7 +20,7 @@ var browserSyncConfigs = {
   port: 3000
 };
 
-var banner = [
+const banner = [
   '/*!',
   ' * MoveTo - ' + pkg.description,
   ' * Version ' + pkg.version + ' (' + today + ')',
@@ -30,7 +30,7 @@ var banner = [
 ].join('\n');
 
 
-gulp.task('scripts:lint', cb => {
+gulp.task('scripts:lint', (cb) => {
   return gulp.src('src/scripts/**/*.js')
     .pipe($.eslint())
     .pipe($.eslint.format())
@@ -38,7 +38,6 @@ gulp.task('scripts:lint', cb => {
 });
 
 gulp.task('scripts', ['scripts:lint'], () => {
-
   const scriptsMinChannel = lazypipe()
     .pipe($.uglify)
     .pipe($.rename, {suffix: '.min'})
@@ -54,7 +53,7 @@ gulp.task('scripts', ['scripts:lint'], () => {
 
 gulp.task('clean:dist', () => del(['dist/*'], {dot: true}));
 
-gulp.task('build', cb =>
+gulp.task('build', (cb) =>
   runSequence(
     ['clean:dist'],
     ['scripts'],
