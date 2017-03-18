@@ -57,7 +57,8 @@ body {
   z-index: 3;
 }
 
-.github-corner:hover {
+.github-corner:hover,
+.github-corner:focus {
   color: white;
 }
 
