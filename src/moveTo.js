@@ -78,117 +78,111 @@ const MoveTo = (() => {
   };
 
   /**
-   * Scrolls to an element
+   * MoveTo Constructor
+   * @param {object} options Options
+   * @param {object} easeFunctions Custom ease functions
    */
-  class MoveTo {
-
-    /**
-     * Constructer
-     * @param {Object} options Options
-     * @param {Object} easeFunctions Custom ease functions
-     */
-    constructor(options = {}, easeFunctions = {}) {
-      this.options = mergeObject(defaults, options);
-      this.easeFunctions = mergeObject({easeOutQuart}, easeFunctions);
-    }
-
-    /**
-     * Register a dom element as trigger
-     * @param  {HTMLElement} dom Dom trigger element
-     * @param  {function} callback Callback function
-     */
-    registerTrigger(dom, callback) {
-      if (!dom) {
-        return;
-      }
-
-      const href = dom.getAttribute('href') || dom.getAttribute('data-target');
-      // The element to be scrolled
-      const target = (href && href !== '#')
-        ? document.getElementById(href.substring(1))
-        : 0;
-      const options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
-
-      if (typeof callback === 'function') {
-        options.callback = callback;
-      }
-
-      dom.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.move(target, options);
-      });
-    }
-
-    /**
-     * Move
-     * Scrolls to given element by using easeOutQuart function
-     * @param  {HTMLElement|number} target Target element to be scrolled or target position
-     * @param  {object} options Custom options
-     */
-    move(target, options = {}) {
-      if (target !== 0 && !target) {
-        return;
-      }
-
-      options = mergeObject(this.options, options);
-
-      let to = typeof target === 'number' ? target : getOffsetSum(target).top;
-      const from = window.pageYOffset;
-      to -= options.tolerance;
-      const change = to - from;
-      let startTime = null;
-      let lastPageYOffset = 0;
-
-      // rAF loop
-      const loop = (currentTime) => {
-        let currentPageYOffset = window.pageYOffset;
-
-        if (!startTime) {
-          // To starts time from 1, we subtracted -1 from current time
-          // If time starts from 1 The first loop will not do anything,
-          // because easing value will be zero
-          startTime = currentTime - 1;
-        }
-
-        const timeElapsed = currentTime - startTime;
-
-        if (lastPageYOffset !== 0) {
-          if (
-            (lastPageYOffset === currentPageYOffset) ||
-            (change > 0 && lastPageYOffset > currentPageYOffset) ||
-            (change < 0 && lastPageYOffset < currentPageYOffset)
-          ) {
-            return options.callback(target);
-          }
-        }
-        lastPageYOffset = currentPageYOffset;
-
-        const val = this.easeFunctions[options.easing](
-          timeElapsed, from, change, options.duration
-        );
-
-        window.scroll(0, val);
-
-        if (timeElapsed < options.duration) {
-          window.requestAnimationFrame(loop);
-        } else {
-          window.scroll(0, to);
-          options.callback(target);
-        }
-      };
-
-      window.requestAnimationFrame(loop);
-    }
-
-    /**
-     * Adds custom ease function
-     * @param {string}   name Ease function name
-     * @param {function} fn   Ease function
-     */
-    addEaseFunction(name, fn) {
-      this.easeFunctions[name] = fn;
-    }
+  function MoveTo(options = {}, easeFunctions = {}) {
+    this.options = mergeObject(defaults, options);
+    this.easeFunctions = mergeObject({easeOutQuart}, easeFunctions);
   }
+
+  /**
+   * Register a dom element as trigger
+   * @param  {HTMLElement} dom Dom trigger element
+   * @param  {function} callback Callback function
+   */
+  MoveTo.prototype.registerTrigger = function(dom, callback) {
+    if (!dom) {
+      return;
+    }
+
+    const href = dom.getAttribute('href') || dom.getAttribute('data-target');
+    // The element to be scrolled
+    const target = (href && href !== '#')
+      ? document.getElementById(href.substring(1))
+      : 0;
+    const options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
+
+    if (typeof callback === 'function') {
+      options.callback = callback;
+    }
+
+    dom.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.move(target, options);
+    });
+  };
+
+  /**
+   * Move
+   * Scrolls to given element by using easeOutQuart function
+   * @param  {HTMLElement|number} target Target element to be scrolled or target position
+   * @param  {object} options Custom options
+   */
+  MoveTo.prototype.move = function(target, options = {}) {
+    if (target !== 0 && !target) {
+      return;
+    }
+
+    options = mergeObject(this.options, options);
+
+    let to = typeof target === 'number' ? target : getOffsetSum(target).top;
+    const from = window.pageYOffset;
+    to -= options.tolerance;
+    const change = to - from;
+    let startTime = null;
+    let lastPageYOffset = 0;
+
+    // rAF loop
+    const loop = (currentTime) => {
+      let currentPageYOffset = window.pageYOffset;
+
+      if (!startTime) {
+        // To starts time from 1, we subtracted -1 from current time
+        // If time starts from 1 The first loop will not do anything,
+        // because easing value will be zero
+        startTime = currentTime - 1;
+      }
+
+      const timeElapsed = currentTime - startTime;
+
+      if (lastPageYOffset !== 0) {
+        if (
+          (lastPageYOffset === currentPageYOffset) ||
+          (change > 0 && lastPageYOffset > currentPageYOffset) ||
+          (change < 0 && lastPageYOffset < currentPageYOffset)
+        ) {
+          return options.callback(target);
+        }
+      }
+      lastPageYOffset = currentPageYOffset;
+
+      const val = this.easeFunctions[options.easing](
+        timeElapsed, from, change, options.duration
+      );
+
+      window.scroll(0, val);
+
+      if (timeElapsed < options.duration) {
+        window.requestAnimationFrame(loop);
+      } else {
+        window.scroll(0, to);
+        options.callback(target);
+      }
+    };
+
+    window.requestAnimationFrame(loop);
+  };
+
+  /**
+   * Adds custom ease function
+   * @param {string}   name Ease function name
+   * @param {function} fn   Ease function
+   */
+  MoveTo.prototype.addEaseFunction = function(name, fn) {
+    this.easeFunctions[name] = fn;
+  };
 
   /**
    * Returns options which created from trigger dom element
