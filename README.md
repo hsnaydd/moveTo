@@ -47,6 +47,10 @@ Trigger HTML markup
 
 ```html
   <a href="#target" class="js-trigger" data-mt-duration="300">Trigger</a>
+
+  <!-- or -->
+
+  <button type="button" class="js-trigger" data-target="#target" data-mt-duration="300">Trigger</button>
 ```
 
 ## Options
@@ -201,7 +205,7 @@ npm test
 
 ## Browser Support
 
-It should work in the current stable releases of Chrome, Firefox, Safari as well as IE9 and up.
+It should work in the current stable releases of Chrome, Firefox, Safari as well as IE10 and up. To add support for older browsers, consider including polyfills/shims for the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame).
 
 ## License
 

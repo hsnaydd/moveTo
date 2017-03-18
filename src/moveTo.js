@@ -2,7 +2,7 @@
 const MoveTo = (() => {
   /**
    * Defaults
-   * @type {Object}
+   * @type {object}
    */
   const defaults = {
     tolerance: 0,
@@ -13,11 +13,11 @@ const MoveTo = (() => {
 
   /**
    * easeOutQuart Easing Function
-   * @param  {Integer} t - current time
-   * @param  {Integer} b - start value
-   * @param  {Integer} c - change in value
-   * @param  {Integer} d - duration
-   * @return {Integer} - calculated value
+   * @param  {number} t - current time
+   * @param  {number} b - start value
+   * @param  {number} c - change in value
+   * @param  {number} d - duration
+   * @return {number} - calculated value
    */
   function easeOutQuart(t, b, c, d) {
     t /= d;
@@ -27,29 +27,28 @@ const MoveTo = (() => {
 
   /**
    * Returns html element's top and left offset
-   * @param  {Node} elem - Element
-   * @return {Object} Element top and left offset
+   * @param  {HTMLElement} elem - Element
+   * @return {object} Element top and left offset
    */
   function getOffsetSum(elem) {
     let top = 0;
     let left = 0;
     while (elem) {
-      top += parseInt(elem.offsetTop, 10);
-      left += parseInt(elem.offsetLeft, 10);
+      top += elem.offsetTop;
+      left += elem.offsetLeft;
       elem = elem.offsetParent;
     }
     return {
-      top: top,
-      left: left,
+      top, left,
     };
   }
 
   /**
    * Merge two object
    *
-   * @param  {Object} obj1
-   * @param  {Object} obj2
-   * @return {Object} merged object
+   * @param  {object} obj1
+   * @param  {object} obj2
+   * @return {object} merged object
    */
   function mergeObject(obj1, obj2) {
     let obj3 = {};
@@ -70,14 +69,13 @@ const MoveTo = (() => {
   /**
    * Converts camel case to kebab case
    * @param  {string} val the value to be converted
-   * @return {String} the converted value
+   * @return {string} the converted value
    */
   function kebabCase(val) {
     return val.replace(/([A-Z])/g, function($1) {
       return '-' + $1.toLowerCase();
     });
   };
-
 
   /**
    * Scrolls to an element
@@ -97,14 +95,14 @@ const MoveTo = (() => {
     /**
      * Register a dom element as trigger
      * @param  {HTMLElement} dom Dom trigger element
-     * @param  {Function} callback Callback function
+     * @param  {function} callback Callback function
      */
     registerTrigger(dom, callback) {
       if (!dom) {
         return;
       }
 
-      const href = dom.getAttribute('href');
+      const href = dom.getAttribute('href') || dom.getAttribute('data-target');
       // The element to be scrolled
       const target = (href && href !== '#')
         ? document.getElementById(href.substring(1))
@@ -124,8 +122,8 @@ const MoveTo = (() => {
     /**
      * Move
      * Scrolls to given element by using easeOutQuart function
-     * @param  {HTMLElement|Number} target Target element to be scrolled or target position
-     * @param  {Object} options Custom options
+     * @param  {HTMLElement|number} target Target element to be scrolled or target position
+     * @param  {object} options Custom options
      */
     move(target, options = {}) {
       if (target !== 0 && !target) {
@@ -138,15 +136,22 @@ const MoveTo = (() => {
       const from = window.pageYOffset;
       to -= options.tolerance;
       const change = to - from;
-      let currentTime = 0;
-      const increment = 20;
+      let startTime = null;
       let lastPageYOffset = 0;
 
-      /*
-       * Scroll Animation Function
-       */
-      const animate = () => {
+      // rAF loop
+      const loop = (currentTime) => {
         let currentPageYOffset = window.pageYOffset;
+
+        if (!startTime) {
+          // To starts time from 1, we subtracted -1 from current time
+          // If time starts from 1 The first loop will not do anything,
+          // because easing value will be zero
+          startTime = currentTime - 1;
+        }
+
+        const timeElapsed = currentTime - startTime;
+
         if (lastPageYOffset !== 0) {
           if (
             (lastPageYOffset === currentPageYOffset) ||
@@ -157,24 +162,28 @@ const MoveTo = (() => {
           }
         }
         lastPageYOffset = currentPageYOffset;
-        currentTime += increment;
+
         const val = this.easeFunctions[options.easing](
-          currentTime, from, change, options.duration
+          timeElapsed, from, change, options.duration
         );
+
         window.scroll(0, val);
-        if (currentTime < options.duration) {
-          setTimeout(animate, increment);
+
+        if (timeElapsed < options.duration) {
+          window.requestAnimationFrame(loop);
         } else {
+          window.scroll(0, to);
           options.callback(target);
         }
       };
-      animate();
+
+      window.requestAnimationFrame(loop);
     }
 
     /**
      * Adds custom ease function
-     * @param {String}   name Ease function name
-     * @param {Function} fn   Ease Function
+     * @param {string}   name Ease function name
+     * @param {function} fn   Ease function
      */
     addEaseFunction(name, fn) {
       this.easeFunctions[name] = fn;
@@ -184,8 +193,8 @@ const MoveTo = (() => {
   /**
    * Returns options which created from trigger dom element
    * @param  {HTMLElement} dom Trigger dom element
-   * @param  {Object} options The instance's options
-   * @return {Object} The options which created from trigger dom element
+   * @param  {object} options The instance's options
+   * @return {object} The options which created from trigger dom element
    */
   function _getOptionsFromTriggerDom(dom, options) {
     const domOptions = {};
