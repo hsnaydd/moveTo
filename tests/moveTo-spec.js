@@ -22,6 +22,12 @@ function createMockDomElement(options) {
   };
 }
 
+window.requestAnimationFrame = (function() {
+  return function(callback) {
+    window.setTimeout(callback, 1000 / 60);
+  };
+})();
+
 test('It should create instance successfully', (t) =>{
   t.notThrows(() => {
     new MoveTo();

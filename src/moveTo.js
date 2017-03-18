@@ -34,13 +34,12 @@ const MoveTo = (() => {
     let top = 0;
     let left = 0;
     while (elem) {
-      top += parseInt(elem.offsetTop, 10);
-      left += parseInt(elem.offsetLeft, 10);
+      top += elem.offsetTop;
+      left += elem.offsetLeft;
       elem = elem.offsetParent;
     }
     return {
-      top: top,
-      left: left,
+      top, left,
     };
   }
 
@@ -138,15 +137,22 @@ const MoveTo = (() => {
       const from = window.pageYOffset;
       to -= options.tolerance;
       const change = to - from;
-      let currentTime = 0;
-      const increment = 20;
+      let startTime = null;
       let lastPageYOffset = 0;
 
-      /*
-       * Scroll Animation Function
-       */
-      const animate = () => {
+      // rAF loop
+      const loop = (currentTime) => {
         let currentPageYOffset = window.pageYOffset;
+
+        if (!startTime) {
+          // To starts time from 1, we subtracted -1 from current time
+          // If time starts from 1 The first loop will not do anything,
+          // because easing value will be zero
+          startTime = currentTime - 1;
+        }
+
+        const timeElapsed = currentTime - startTime;
+
         if (lastPageYOffset !== 0) {
           if (
             (lastPageYOffset === currentPageYOffset) ||
@@ -157,18 +163,22 @@ const MoveTo = (() => {
           }
         }
         lastPageYOffset = currentPageYOffset;
-        currentTime += increment;
+
         const val = this.easeFunctions[options.easing](
-          currentTime, from, change, options.duration
+          timeElapsed, from, change, options.duration
         );
+
         window.scroll(0, val);
-        if (currentTime < options.duration) {
-          setTimeout(animate, increment);
+
+        if (timeElapsed < options.duration) {
+          window.requestAnimationFrame(loop);
         } else {
+          window.scroll(0, to);
           options.callback(target);
         }
       };
-      animate();
+
+      window.requestAnimationFrame(loop);
     }
 
     /**
