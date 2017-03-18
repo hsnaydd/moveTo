@@ -205,7 +205,7 @@ npm test
 
 ## Browser Support
 
-It should work in the current stable releases of Chrome, Firefox, Safari as well as IE10 and up. To add IE9 support consider including polyfills/shims for the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame).
+It should work in the current stable releases of Chrome, Firefox, Safari as well as IE10 and up. To add support for older browsers, consider including polyfills/shims for the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame).
 
 ## License
 
