@@ -111,7 +111,7 @@ Ease function name.
 #### fn
 Type: Function
 
-Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more ease function.
+Ease function. See [Easing Equations](http://gizma.com/easing/) for more ease function.
 
 ## Examples
 
