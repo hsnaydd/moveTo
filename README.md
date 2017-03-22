@@ -1,27 +1,27 @@
 # MoveTo [![npm version](https://badge.fury.io/js/moveto.svg)](https://badge.fury.io/js/moveto) [![Bower version](https://badge.fury.io/bo/moveTo.svg)](https://badge.fury.io/bo/moveTo) [![Build Status](https://travis-ci.org/hsnaydd/moveTo.svg?branch=master)](https://travis-ci.org/hsnaydd/moveTo.js)
 
-A lightweight (only 1kb gzipped), smooth scrolling javascript library without any dependency.
+A lightweight (only 1kb gzipped) scroll animation javascript library without any dependency.
 
 [Demo](https://hsnaydd.github.io/moveTo/demo/)
 
 ## Installation
 
-Using NPM
+### Using npm
 
 ```sh
-npm install moveTo --save
+$ npm install moveto --save
 ```
 
-Using Yarn
+### Using Yarn
 
 ```sh
-yarn add moveTo
+$ yarn add moveto
 ```
 
-Using Bower
+### Using Bower
 
 ```sh
-bower install moveTo --save
+$ bower install moveTo --save
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ const target = document.getElementById('target');
 
 moveTo.move(target);
 
-// or register a trigger
+// Or register a trigger
 
 const trigger = document.getElementsByClassName('js-trigger')[0];
 
@@ -43,14 +43,14 @@ moveTo.registerTrigger(trigger);
 
 Trigger HTML markup
 
-> You can pass all options as data attributes with `mt` prefix. Option name should be written in kebab case format.
+You can pass all options as data attributes with `mt` prefix. Option name should be written in kebab case format, for example:
 
 ```html
-  <a href="#target" class="js-trigger" data-mt-duration="300">Trigger</a>
+<a href="#target" class="js-trigger" data-mt-duration="300">Trigger</a>
 
-  <!-- or -->
+<!-- Or -->
 
-  <button type="button" class="js-trigger" data-target="#target" data-mt-duration="300">Trigger</button>
+<button type="button" class="js-trigger" data-target="#target" data-mt-duration="300">Trigger</button>
 ```
 
 ## Options
@@ -67,8 +67,8 @@ new MoveTo({
 
 | Option    | Default      | Desctiption                                                                          |
 |-----------|--------------|--------------------------------------------------------------------------------------|
-| tolerance | 0            | The tolerance of the target to be scrolled, can be negative or positive.             |
-| duration  | 800          | Duration of scrolling, in milliseconds.                                              |
+| tolerance | 0            | The tolerance of the target to be scrolled, can be negative or positive              |
+| duration  | 800          | Duration of scrolling, in milliseconds                                               |
 | easing    | easeOutQuart | Ease function name                                                                   |
 | callback  | noop         | The function to be run after scrolling complete. Target passes as the first argument |
 
@@ -76,17 +76,17 @@ new MoveTo({
 
 ### move(target, options)
 
-Scrolls to target
+Start scroll animation from current position to the anchor point
 
 #### target
 Type: HTMLElement|Number
 
-Target element/position to be scrolled. Target position is the distance to the top of the page
+Target element/position to be scrolled. Target position is the distance to the top of the page.
 
 #### options
 Type: Object
 
-Pass custom options
+Pass custom options.
 
 ### registerTrigger(trigger, callback)
 
@@ -101,17 +101,17 @@ This is the callback function to be run after the scroll complete. This will ove
 
 ### addEaseFunction(name, fn)
 
-Adds custom ease function
+Adds custom ease function.
 
 #### name
 Type: String
 
-Ease function name
+Ease function name.
 
 #### fn
 Type: Function
 
-Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more ease function.
+Ease function. See [Easing Equations](http://gizma.com/easing/) for more ease function.
 
 ## Examples
 
@@ -119,7 +119,7 @@ Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more
   <summary>Pass ease function(s) when creating instance</summary>
 
   ```js
-  document.addEventListener('DOMContentLoaded', function(){
+  document.addEventListener('DOMContentLoaded', function () {
     const easeFunctions = {
       easeInQuad: function (t, b, c, d) {
         t /= d;
@@ -130,45 +130,47 @@ Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more
         return -c * t* (t - 2) + b;
       }
     }
+
     const moveTo = new MoveTo({
       duration: 1000,
       easing: 'easeInQuad'
     }, easeFunctions);
+
     const trigger = document.getElementsByClassName('js-trigger')[0];
+
     moveTo.registerTrigger(trigger);
   });
   ```
-
 </details>
 
 <details>
   <summary>Working with callback function</summary>
 
   ```js
-  document.addEventListener('DOMContentLoaded', function(){
+  document.addEventListener('DOMContentLoaded', function () {
     const moveTo = new MoveTo({
       duration: 1000,
-      callback: function(target) {
+      callback: function (target) {
         // This will run if there is no overwrite
       }
     });
+
     const trigger = document.getElementsByClassName('js-trigger')[0];
 
-    moveTo.registerTrigger(trigger, function(target) {
-      // overwrites global callback
+    moveTo.registerTrigger(trigger, function (target) {
+      // Overwrites global callback
     });
 
-    // or
+    // Or
 
     moveTo.move(1200, {
       duration: 500,
-      callback: function() {
-        // overwrites global callback
+      callback: function () {
+        // Overwrites global callback
       }
     });
   });
-  ```
-
+```
 </details>
 
 ## Development setup
@@ -176,34 +178,34 @@ Ease function. See [http://gizma.com/easing/](http://gizma.com/easing/) for more
 ```sh
 # To install dev dependencies run:
 
-yarn
+$ yarn
 
-# or
+# Or so if using npm:
 
-npm install
+$ npm install
 
 # To start the development server run:
 
-gulp serve
+$ gulp serve
 
 # To lint your code run:
 
-gulp scripts:lint
+$ gulp scripts:lint
 
 # To make a full new build run:
 
-gulp build
+$ gulp build
 
-# To run tests
+# To run tests:
 
-yarn test
+$ yarn test
 
-# or
+# Or so if using npm:
 
-npm test
+$ npm test
 ```
 
-## Browser Support
+## Browser support
 
 It should work in the current stable releases of Chrome, Firefox, Safari as well as IE10 and up. To add support for older browsers, consider including polyfills/shims for the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame).
 
