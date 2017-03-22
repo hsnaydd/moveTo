@@ -117,7 +117,7 @@ const MoveTo = (() => {
    * @param  {object} options Custom options
    */
   MoveTo.prototype.move = function(target, options = {}) {
-    if (!target) {
+    if (target !== 0 && !target) {
       return;
     }
 
