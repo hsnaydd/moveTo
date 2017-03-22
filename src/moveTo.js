@@ -51,18 +51,14 @@ const MoveTo = (() => {
    * @return {object} merged object
    */
   function mergeObject(obj1, obj2) {
-    let obj3 = {};
-    let propertyName;
-    for (propertyName in obj1) {
-      if (obj1.hasOwnProperty(propertyName)) {
-        obj3[propertyName] = obj1[propertyName];
-      }
-    }
-    for (propertyName in obj2) {
-      if (obj2.hasOwnProperty(propertyName)) {
-        obj3[propertyName] = obj2[propertyName];
-      }
-    }
+    const obj3 = {};
+    Object.keys(obj1).forEach((propertyName) => {
+      obj3[propertyName] = obj1[propertyName];
+    });
+
+    Object.keys(obj2).forEach((propertyName) => {
+      obj3[propertyName] = obj2[propertyName];
+    });
     return obj3;
   };
 
