@@ -1,6 +1,6 @@
 /*!
- * MoveTo - A lightweight, smooth scrolling javascript library without any dependency.
- * Version 1.5.1 (18-03-2017 19:23)
+ * MoveTo - A lightweight scroll animation javascript library without any dependency.
+ * Version 1.5.2 (22-03-2017 10:25)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -59,17 +59,13 @@ var MoveTo = function () {
      */
   function mergeObject(obj1, obj2) {
     var obj3 = {};
-    var propertyName = void 0;
-    for (propertyName in obj1) {
-      if (obj1.hasOwnProperty(propertyName)) {
-        obj3[propertyName] = obj1[propertyName];
-      }
-    }
-    for (propertyName in obj2) {
-      if (obj2.hasOwnProperty(propertyName)) {
-        obj3[propertyName] = obj2[propertyName];
-      }
-    }
+    Object.keys(obj1).forEach(function (propertyName) {
+      obj3[propertyName] = obj1[propertyName];
+    });
+
+    Object.keys(obj2).forEach(function (propertyName) {
+      obj3[propertyName] = obj2[propertyName];
+    });
     return obj3;
   };
 
