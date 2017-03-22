@@ -8,7 +8,7 @@ const MoveTo = (() => {
     tolerance: 0,
     duration: 800,
     easing: 'easeOutQuart',
-    callback: function() {},
+    callback: function() {}
   };
 
   /**
@@ -19,10 +19,10 @@ const MoveTo = (() => {
    * @param  {number} d - duration
    * @return {number} - calculated value
    */
-  function easeOutQuart(t, b, c, d) {
-    t /= d;
-    t--;
-    return -c * (t * t * t * t - 1) + b;
+  function easeOutQuart(currentTime, startValue, change, duration) {
+    currentTime /= duration;
+    currentTime--;
+    return -change * (currentTime * currentTime * currentTime * currentTime - 1) + startValue;
   }
 
   /**
@@ -121,7 +121,7 @@ const MoveTo = (() => {
    * @param  {object} options Custom options
    */
   MoveTo.prototype.move = function(target, options = {}) {
-    if (target !== 0 && !target) {
+    if (!target) {
       return;
     }
 
@@ -139,7 +139,7 @@ const MoveTo = (() => {
       let currentPageYOffset = window.pageYOffset;
 
       if (!startTime) {
-        // To starts time from 1, we subtracted -1 from current time
+        // To starts time from 1, we subtracted 1 from current time
         // If time starts from 1 The first loop will not do anything,
         // because easing value will be zero
         startTime = currentTime - 1;
@@ -147,7 +147,7 @@ const MoveTo = (() => {
 
       const timeElapsed = currentTime - startTime;
 
-      if (lastPageYOffset !== 0) {
+      if (lastPageYOffset) {
         if (
           (lastPageYOffset === currentPageYOffset) ||
           (change > 0 && lastPageYOffset > currentPageYOffset) ||
