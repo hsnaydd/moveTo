@@ -76,7 +76,7 @@ new MoveTo({
 
 ### move(target, options)
 
-Scrolls to target
+Start scroll animation from current position to the anchor point
 
 #### target
 Type: HTMLElement|Number
