@@ -1,6 +1,6 @@
 # MoveTo [![npm version](https://badge.fury.io/js/moveto.svg)](https://badge.fury.io/js/moveto) [![Bower version](https://badge.fury.io/bo/moveTo.svg)](https://badge.fury.io/bo/moveTo) [![Build Status](https://travis-ci.org/hsnaydd/moveTo.svg?branch=master)](https://travis-ci.org/hsnaydd/moveTo.js)
 
-A lightweight (only 1kb gzipped), smooth scrolling javascript library without any dependency.
+A lightweight (only 1kb gzipped) scroll animation javascript library without any dependency.
 
 [Demo](https://hsnaydd.github.io/moveTo/demo/)
 
@@ -76,7 +76,7 @@ new MoveTo({
 
 ### move(target, options)
 
-Scrolls to target
+Start scroll animation from current position to the anchor point
 
 #### target
 Type: HTMLElement|Number
@@ -137,7 +137,7 @@ Ease function. See [Easing Equations](http://gizma.com/easing/) for more ease fu
     }, easeFunctions);
 
     const trigger = document.getElementsByClassName('js-trigger')[0];
-    
+
     moveTo.registerTrigger(trigger);
   });
   ```
@@ -145,7 +145,7 @@ Ease function. See [Easing Equations](http://gizma.com/easing/) for more ease fu
 
 <details>
   <summary>Working with callback function</summary>
-  
+
   ```js
   document.addEventListener('DOMContentLoaded', function () {
     const moveTo = new MoveTo({
@@ -154,7 +154,7 @@ Ease function. See [Easing Equations](http://gizma.com/easing/) for more ease fu
         // This will run if there is no overwrite
       }
     });
-    
+
     const trigger = document.getElementsByClassName('js-trigger')[0];
 
     moveTo.registerTrigger(trigger, function (target) {
