@@ -9,13 +9,13 @@ A lightweight (only 1kb gzipped) scroll animation javascript library without any
 ### Using npm
 
 ```sh
-$ npm install moveTo --save
+$ npm install moveto --save
 ```
 
 ### Using Yarn
 
 ```sh
-$ yarn add moveTo
+$ yarn add moveto
 ```
 
 ### Using Bower
