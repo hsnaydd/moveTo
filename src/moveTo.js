@@ -135,7 +135,7 @@ const MoveTo = (() => {
       let currentPageYOffset = window.pageYOffset;
 
       if (!startTime) {
-        // To starts time from 1, we subtracted -1 from current time
+        // To starts time from 1, we subtracted 1 from current time
         // If time starts from 1 The first loop will not do anything,
         // because easing value will be zero
         startTime = currentTime - 1;
@@ -143,7 +143,7 @@ const MoveTo = (() => {
 
       const timeElapsed = currentTime - startTime;
 
-      if (lastPageYOffset !== 0) {
+      if (lastPageYOffset) {
         if (
           (lastPageYOffset === currentPageYOffset) ||
           (change > 0 && lastPageYOffset > currentPageYOffset) ||
