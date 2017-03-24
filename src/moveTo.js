@@ -204,5 +204,5 @@ const MoveTo = (() => {
 if (typeof module !== 'undefined') {
   module.exports = MoveTo;
 } else {
-  window.moveTo = MoveTo;
+  window.MoveTo = MoveTo;
 }
