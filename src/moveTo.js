@@ -128,7 +128,7 @@ const MoveTo = (() => {
     to -= options.tolerance;
     const change = to - from;
     let startTime = null;
-    let lastPageYOffset = 0;
+    let lastPageYOffset;
 
     // rAF loop
     const loop = (currentTime) => {
@@ -204,5 +204,5 @@ const MoveTo = (() => {
 if (typeof module !== 'undefined') {
   module.exports = MoveTo;
 } else {
-  window.moveTo = MoveTo;
+  window.MoveTo = MoveTo;
 }
