@@ -18,6 +18,9 @@ function createMockDomElement(options) {
     offsetParent: null,
     addEventListener: function(event, cb) {
       this._listeners[event] = cb;
+    },
+    removeEventListener: function(event, cb) {
+      delete this._listeners[event];
     }
   };
 }
@@ -65,13 +68,21 @@ test('It should change options', (t) => {
 
 test('It should register trigger', (t) => {
   const instance = new MoveTo();
-
   const elem = createMockDomElement({});
-  t.is(elem._listeners['click'], undefined);
 
   instance.registerTrigger(elem);
 
   t.true(typeof elem._listeners['click'] === 'function');
+});
+
+test('It should unregister trigger', (t) => {
+  const instance = new MoveTo();
+  const elem = createMockDomElement({});
+  const unregister = instance.registerTrigger(elem);
+
+  t.true(typeof elem._listeners['click'] === 'function');
+  unregister();
+  t.true(typeof elem._listeners['click'] === 'undefined');
 });
 
 test('It should add custom ease function', (t) => {

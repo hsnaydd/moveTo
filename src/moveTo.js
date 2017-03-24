@@ -87,6 +87,7 @@ const MoveTo = (() => {
    * Register a dom element as trigger
    * @param  {HTMLElement} dom Dom trigger element
    * @param  {function} callback Callback function
+   * @return {function|void} unregister function
    */
   MoveTo.prototype.registerTrigger = function(dom, callback) {
     if (!dom) {
@@ -104,10 +105,14 @@ const MoveTo = (() => {
       options.callback = callback;
     }
 
-    dom.addEventListener('click', (e) => {
+    const listener = (e) => {
       e.preventDefault();
       this.move(target, options);
-    });
+    };
+
+    dom.addEventListener('click', listener, false);
+
+    return () => dom.removeEventListener('click', listener, false);
   };
 
   /**
