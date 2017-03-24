@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.5.2 (22-03-2017 10:25)
+ * Version 1.5.3 (24-03-2017 14:41)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -135,14 +135,14 @@ var MoveTo = function () {
     to -= options.tolerance;
     var change = to - from;
     var startTime = null;
-    var lastPageYOffset = 0;
+    var lastPageYOffset = void 0;
 
     // rAF loop
     var loop = function loop(currentTime) {
       var currentPageYOffset = window.pageYOffset;
 
       if (!startTime) {
-        // To starts time from 1, we subtracted -1 from current time
+        // To starts time from 1, we subtracted 1 from current time
         // If time starts from 1 The first loop will not do anything,
         // because easing value will be zero
         startTime = currentTime - 1;
@@ -150,7 +150,7 @@ var MoveTo = function () {
 
       var timeElapsed = currentTime - startTime;
 
-      if (lastPageYOffset !== 0) {
+      if (lastPageYOffset) {
         if (
         lastPageYOffset === currentPageYOffset ||
         change > 0 && lastPageYOffset > currentPageYOffset ||
@@ -211,5 +211,5 @@ var MoveTo = function () {
 if (typeof module !== 'undefined') {
   module.exports = MoveTo;
 } else {
-  window.moveTo = MoveTo;
+  window.MoveTo = MoveTo;
 }
