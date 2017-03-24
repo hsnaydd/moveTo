@@ -1,7 +1,7 @@
 {
   "name": "moveto",
   "description": "A lightweight scroll animation javascript library without any dependency.",
-  "main": "src/moveTo.js",
+  "main": "dist/moveTo.js",
   "authors": [
     "Hasan Aydoğdu <hsnaydd@gmail.com>"
   ],

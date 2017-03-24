@@ -2,7 +2,7 @@
   "name": "moveto",
   "version": "1.5.2",
   "description": "A lightweight scroll animation javascript library without any dependency.",
-  "main": "src/moveTo.js",
+  "main": "dist/moveTo.js",
   "scripts": {
     "test": "ava tests/**"
   },
