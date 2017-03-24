@@ -181,10 +181,10 @@ Ease function. See [Easing Equations](http://gizma.com/easing/) for more ease fu
     const moveTo = new MoveTo();
 
     const trigger = document.getElementsByClassName('js-trigger')[0];
-    
-    // Registered a trigger
+
+    // Register a trigger
     const unregister = moveTo.registerTrigger(trigger, { duration: 500 });
-    
+
     // Unregister a trigger
     unregister();
   });
