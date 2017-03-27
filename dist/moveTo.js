@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.5.3 (24-03-2017 14:41)
+ * Version 1.6.0 (27-03-2017 10:55)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -94,6 +94,7 @@ var MoveTo = function () {
      * Register a dom element as trigger
      * @param  {HTMLElement} dom Dom trigger element
      * @param  {function} callback Callback function
+     * @return {function|void} unregister function
      */
   MoveTo.prototype.registerTrigger = function (dom, callback) {var _this = this;
     if (!dom) {
@@ -111,10 +112,14 @@ var MoveTo = function () {
       options.callback = callback;
     }
 
-    dom.addEventListener('click', function (e) {
+    var listener = function listener(e) {
       e.preventDefault();
       _this.move(target, options);
-    });
+    };
+
+    dom.addEventListener('click', listener, false);
+
+    return function () {return dom.removeEventListener('click', listener, false);};
   };
 
   /**
