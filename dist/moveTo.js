@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.6.0 (27-03-2017 10:55)
+ * Version 1.6.1 (12-04-2017 10:18)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -157,7 +157,6 @@ var MoveTo = function () {
 
       if (lastPageYOffset) {
         if (
-        lastPageYOffset === currentPageYOffset ||
         change > 0 && lastPageYOffset > currentPageYOffset ||
         change < 0 && lastPageYOffset < currentPageYOffset)
         {
