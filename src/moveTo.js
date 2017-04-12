@@ -150,7 +150,7 @@ const MoveTo = (() => {
 
       if (lastPageYOffset) {
         if (
-          (lastPageYOffset === currentPageYOffset) ||
+          (lastPageYOffset === to) ||
           (change > 0 && lastPageYOffset > currentPageYOffset) ||
           (change < 0 && lastPageYOffset < currentPageYOffset)
         ) {
