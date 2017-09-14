@@ -31,16 +31,20 @@ const MoveTo = (() => {
    * @return {object} Element top and left offset
    */
   function getOffsetSum(elem) {
-    let top = 0;
-    let left = 0;
-    while (elem) {
-      top += elem.offsetTop;
-      left += elem.offsetLeft;
-      elem = elem.offsetParent;
+    if(typeof elem.getBoundingClientRect == 'function') {
+      return elem.getBoundingClientRect();
+    } else {
+      let top = 0;
+      let left = 0;
+      while (elem) {
+        top += elem.offsetTop;
+        left += elem.offsetLeft;
+        elem = elem.offsetParent;
+      }
+      return {
+        top, left,
+      };
     }
-    return {
-      top, left,
-    };
   }
 
   /**
