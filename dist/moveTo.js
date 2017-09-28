@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.6.1 (12-04-2017 10:18)
+ * Version 1.6.1 (14-09-2017 18:01)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -38,16 +38,20 @@ var MoveTo = function () {
      * @return {object} Element top and left offset
      */
   function getOffsetSum(elem) {
-    var top = 0;
-    var left = 0;
-    while (elem) {
-      top += elem.offsetTop;
-      left += elem.offsetLeft;
-      elem = elem.offsetParent;
-    }
-    return {
-      top: top, left: left };
+    if (typeof elem.getBoundingClientRect == 'function') {
+      return elem.getBoundingClientRect();
+    } else {
+      var top = 0;
+      var left = 0;
+      while (elem) {
+        top += elem.offsetTop;
+        left += elem.offsetLeft;
+        elem = elem.offsetParent;
+      }
+      return {
+        top: top, left: left };
 
+    }
   }
 
   /**
