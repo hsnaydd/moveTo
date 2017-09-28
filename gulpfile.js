@@ -65,6 +65,3 @@ gulp.task('serve', () => {
   browserSync(browserSyncConfigs);
   gulp.watch(['src/**/*.js'], ['scripts', reload]);
 });
-
-
-
