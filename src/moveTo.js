@@ -116,6 +116,11 @@ const MoveTo = (() => {
     let lastPageYOffset;
     distance -= options.tolerance;
 
+    // if distance is `0`, it means to back to the top
+    if (distance === 0) {
+      distance -= from;
+    }
+
     // rAF loop
     const loop = (currentTime) => {
       let currentPageYOffset = window.pageYOffset;
