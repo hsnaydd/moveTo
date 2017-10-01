@@ -26,24 +26,6 @@ const MoveTo = (() => {
   }
 
   /**
-   * Returns html element's top and left offset
-   * @param  {HTMLElement} elem - Element
-   * @return {object} Element top and left offset
-   */
-  function getOffsetSum(elem) {
-    let top = 0;
-    let left = 0;
-    while (elem) {
-      top += elem.offsetTop;
-      left += elem.offsetLeft;
-      elem = elem.offsetParent;
-    }
-    return {
-      top, left,
-    };
-  }
-
-  /**
    * Merge two object
    *
    * @param  {object} obj1
@@ -128,12 +110,16 @@ const MoveTo = (() => {
 
     options = mergeObject(this.options, options);
 
-    let to = typeof target === 'number' ? target : getOffsetSum(target).top;
+    let distance = typeof target === 'number' ? target : target.getBoundingClientRect().top;
     const from = window.pageYOffset;
-    to -= options.tolerance;
-    const change = to - from;
     let startTime = null;
     let lastPageYOffset;
+    distance -= options.tolerance;
+
+    // if distance is `0`, it means to back to the top
+    if (distance === 0) {
+      distance -= from;
+    }
 
     // rAF loop
     const loop = (currentTime) => {
@@ -150,8 +136,8 @@ const MoveTo = (() => {
 
       if (lastPageYOffset) {
         if (
-          (change > 0 && lastPageYOffset > currentPageYOffset) ||
-          (change < 0 && lastPageYOffset < currentPageYOffset)
+          (distance > 0 && lastPageYOffset > currentPageYOffset) ||
+          (distance < 0 && lastPageYOffset < currentPageYOffset)
         ) {
           return options.callback(target);
         }
@@ -159,7 +145,7 @@ const MoveTo = (() => {
       lastPageYOffset = currentPageYOffset;
 
       const val = this.easeFunctions[options.easing](
-        timeElapsed, from, change, options.duration
+        timeElapsed, from, distance, options.duration
       );
 
       window.scroll(0, val);
@@ -167,7 +153,7 @@ const MoveTo = (() => {
       if (timeElapsed < options.duration) {
         window.requestAnimationFrame(loop);
       } else {
-        window.scroll(0, to);
+        window.scroll(0, distance + from);
         options.callback(target);
       }
     };

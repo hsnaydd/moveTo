@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.6.1 (12-04-2017 10:18)
+ * Version 1.7.0 (01-10-2017 14:12)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -30,24 +30,6 @@ var MoveTo = function () {
     t /= d;
     t--;
     return -c * (t * t * t * t - 1) + b;
-  }
-
-  /**
-     * Returns html element's top and left offset
-     * @param  {HTMLElement} elem - Element
-     * @return {object} Element top and left offset
-     */
-  function getOffsetSum(elem) {
-    var top = 0;
-    var left = 0;
-    while (elem) {
-      top += elem.offsetTop;
-      left += elem.offsetLeft;
-      elem = elem.offsetParent;
-    }
-    return {
-      top: top, left: left };
-
   }
 
   /**
@@ -135,12 +117,16 @@ var MoveTo = function () {
 
     options = mergeObject(this.options, options);
 
-    var to = typeof target === 'number' ? target : getOffsetSum(target).top;
+    var distance = typeof target === 'number' ? target : target.getBoundingClientRect().top;
     var from = window.pageYOffset;
-    to -= options.tolerance;
-    var change = to - from;
     var startTime = null;
     var lastPageYOffset = void 0;
+    distance -= options.tolerance;
+
+    // if distance is `0`, it means to back to the top
+    if (distance === 0) {
+      distance -= from;
+    }
 
     // rAF loop
     var loop = function loop(currentTime) {
@@ -157,8 +143,8 @@ var MoveTo = function () {
 
       if (lastPageYOffset) {
         if (
-        change > 0 && lastPageYOffset > currentPageYOffset ||
-        change < 0 && lastPageYOffset < currentPageYOffset)
+        distance > 0 && lastPageYOffset > currentPageYOffset ||
+        distance < 0 && lastPageYOffset < currentPageYOffset)
         {
           return options.callback(target);
         }
@@ -166,7 +152,7 @@ var MoveTo = function () {
       lastPageYOffset = currentPageYOffset;
 
       var val = _this2.easeFunctions[options.easing](
-      timeElapsed, from, change, options.duration);
+      timeElapsed, from, distance, options.duration);
 
 
       window.scroll(0, val);
@@ -174,7 +160,7 @@ var MoveTo = function () {
       if (timeElapsed < options.duration) {
         window.requestAnimationFrame(loop);
       } else {
-        window.scroll(0, to);
+        window.scroll(0, distance + from);
         options.callback(target);
       }
     };

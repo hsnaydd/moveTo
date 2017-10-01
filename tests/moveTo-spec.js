@@ -21,6 +21,9 @@ function createMockDomElement(options) {
     },
     removeEventListener: function(event, cb) {
       delete this._listeners[event];
+    },
+    getBoundingClientRect: function() {
+      return {top: options.offsetTop || 0};
     }
   };
 }

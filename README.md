@@ -81,7 +81,7 @@ Start scroll animation from current position to the anchor point
 #### target
 Type: HTMLElement|Number
 
-Target element/position to be scrolled. Target position is the distance to the top of the page.
+Target element/position to be scrolled. Target position is the scrolling distance. It must be negative if the upward movement is desired.
 
 #### options
 Type: Object
