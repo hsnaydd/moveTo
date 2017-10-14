@@ -33,11 +33,13 @@ const target = document.getElementById('target');
 
 moveTo.move(target);
 
-// Or register a trigger
+// Or register a list of element triggers
 
-const trigger = document.getElementsByClassName('js-trigger')[0];
+const triggers = document.getElementsByClassName('js-trigger');
 
-moveTo.registerTrigger(trigger);
+for(var i=0;i<triggers.length;i++) {
+  moveTo.registerTrigger(triggers[i]);
+}
 
 ```
 
