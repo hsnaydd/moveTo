@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.7.0 (01-10-2017 14:12)
+ * Version 1.7.1 (22-10-2017 02:28)
  * Licensed under MIT
  * Copyright 2017 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -87,7 +87,7 @@ var MoveTo = function () {
     // The element to be scrolled
     var target = href && href !== '#' ?
     document.getElementById(href.substring(1)) :
-    0;
+    document.body;
     var options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
 
     if (typeof callback === 'function') {
@@ -122,11 +122,6 @@ var MoveTo = function () {
     var startTime = null;
     var lastPageYOffset = void 0;
     distance -= options.tolerance;
-
-    // if distance is `0`, it means to back to the top
-    if (distance === 0) {
-      distance -= from;
-    }
 
     // rAF loop
     var loop = function loop(currentTime) {
