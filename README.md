@@ -191,6 +191,25 @@ Ease function. See [Easing Equations](http://gizma.com/easing/) for more ease fu
 ```
 </details>
 
+<details>
+  <summary>Back to top</summary>
+
+  ```js
+  document.addEventListener('DOMContentLoaded', function () {
+    const moveTo = new MoveTo();
+    const triggers = document.getElementsByClassName('js-back-to-top');
+
+    for (var i = 0; triggers.length < i; i++) {
+      moveTo.registerTrigger(triggers[i]);
+    }
+  });
+  ```
+
+  ```html
+  <a href="#" class="js-back-to-top" data-mt-duration="300">Back to top!</a>
+  ```
+</details>
+
 ## Development setup
 
 ```sh
