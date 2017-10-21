@@ -80,7 +80,7 @@ const MoveTo = (() => {
     // The element to be scrolled
     const target = (href && href !== '#')
       ? document.getElementById(href.substring(1))
-      : 0;
+      : document.body;
     const options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
 
     if (typeof callback === 'function') {
@@ -115,11 +115,6 @@ const MoveTo = (() => {
     let startTime = null;
     let lastPageYOffset;
     distance -= options.tolerance;
-
-    // if distance is `0`, it means to back to the top
-    if (distance === 0) {
-      distance -= from;
-    }
 
     // rAF loop
     const loop = (currentTime) => {
