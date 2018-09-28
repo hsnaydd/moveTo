@@ -5,3 +5,4 @@ bower_components/
 npm-debug.log
 .idea
 .idea_modules
+.package-lock.json
