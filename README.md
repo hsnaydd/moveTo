@@ -61,7 +61,8 @@ The default options are as follows:
 new MoveTo({
   tolerance: 0,
   duration: 800,
-  easing: 'easeOutQuart'
+  easing: 'easeOutQuart',
+  container: window
 })
 ```
 
@@ -70,6 +71,7 @@ new MoveTo({
 | tolerance | 0            | The tolerance of the target to be scrolled, can be negative or positive              |
 | duration  | 800          | Duration of scrolling, in milliseconds                                               |
 | easing    | easeOutQuart | Ease function name                                                                   |
+| container | window       | The container been computed and scrolled
 | callback  | noop         | The function to be run after scrolling complete. Target passes as the first argument |
 
 ## API

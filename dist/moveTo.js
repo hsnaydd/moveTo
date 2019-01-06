@@ -1,8 +1,8 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.7.4 (28-09-2018 16:02)
+ * Version 1.7.4 (06-01-2019 19:51)
  * Licensed under MIT
- * Copyright 2018 Hasan Aydoğdu <hsnaydd@gmail.com>
+ * Copyright 2019 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
 
 'use strict';
@@ -15,17 +15,18 @@ var MoveTo = function () {
     tolerance: 0,
     duration: 800,
     easing: 'easeOutQuart',
-    callback: function callback() {} };
+    callback: function callback() {},
+    container: window };
 
 
   /**
-                                         * easeOutQuart Easing Function
-                                         * @param  {number} t - current time
-                                         * @param  {number} b - start value
-                                         * @param  {number} c - change in value
-                                         * @param  {number} d - duration
-                                         * @return {number} - calculated value
-                                         */
+                          * easeOutQuart Easing Function
+                          * @param  {number} t - current time
+                          * @param  {number} b - start value
+                          * @param  {number} c - change in value
+                          * @param  {number} d - duration
+                          * @return {number} - calculated value
+                          */
   function easeOutQuart(t, b, c, d) {
     t /= d;
     t--;
@@ -60,6 +61,18 @@ var MoveTo = function () {
     return val.replace(/([A-Z])/g, function ($1) {
       return '-' + $1.toLowerCase();
     });
+  };
+
+  /**
+      * Count a number of item scrolled top
+      * @param  {Window|HTMLElement} container
+      * @return {number}
+      */
+  function countScrollTop(container) {
+    if (container instanceof HTMLElement) {
+      return container.scrollTop;
+    }
+    return container.pageYOffset;
   };
 
   /**
@@ -118,14 +131,14 @@ var MoveTo = function () {
     options = mergeObject(this.options, options);
 
     var distance = typeof target === 'number' ? target : target.getBoundingClientRect().top;
-    var from = window.pageYOffset;
+    var from = countScrollTop(options.container);
     var startTime = null;
     var lastPageYOffset = void 0;
     distance -= options.tolerance;
 
     // rAF loop
     var loop = function loop(currentTime) {
-      var currentPageYOffset = window.pageYOffset;
+      var currentPageYOffset = countScrollTop(_this2.options.container);
 
       if (!startTime) {
         // To starts time from 1, we subtracted 1 from current time
@@ -150,12 +163,12 @@ var MoveTo = function () {
       timeElapsed, from, distance, options.duration);
 
 
-      window.scroll(0, val);
+      options.container.scroll(0, val);
 
       if (timeElapsed < options.duration) {
         window.requestAnimationFrame(loop);
       } else {
-        window.scroll(0, distance + from);
+        options.container.scroll(0, distance + from);
         options.callback(target);
       }
     };

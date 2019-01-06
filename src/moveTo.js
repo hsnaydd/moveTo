@@ -9,6 +9,7 @@ const MoveTo = (() => {
     duration: 800,
     easing: 'easeOutQuart',
     callback: function() {},
+    container: window,
   };
 
   /**
@@ -53,6 +54,18 @@ const MoveTo = (() => {
     return val.replace(/([A-Z])/g, function($1) {
       return '-' + $1.toLowerCase();
     });
+  };
+
+  /**
+   * Count a number of item scrolled top
+   * @param  {Window|HTMLElement} container
+   * @return {number}
+   */
+  function countScrollTop(container) {
+    if (container instanceof HTMLElement){
+      return container.scrollTop;
+    }
+    return container.pageYOffset;
   };
 
   /**
@@ -111,14 +124,14 @@ const MoveTo = (() => {
     options = mergeObject(this.options, options);
 
     let distance = typeof target === 'number' ? target : target.getBoundingClientRect().top;
-    const from = window.pageYOffset;
+    const from = countScrollTop(options.container);
     let startTime = null;
     let lastPageYOffset;
     distance -= options.tolerance;
 
     // rAF loop
     const loop = (currentTime) => {
-      let currentPageYOffset = window.pageYOffset;
+      let currentPageYOffset = countScrollTop(this.options.container);
 
       if (!startTime) {
         // To starts time from 1, we subtracted 1 from current time
@@ -143,12 +156,12 @@ const MoveTo = (() => {
         timeElapsed, from, distance, options.duration
       );
 
-      window.scroll(0, val);
+      options.container.scroll(0, val);
 
       if (timeElapsed < options.duration) {
         window.requestAnimationFrame(loop);
       } else {
-        window.scroll(0, distance + from);
+        options.container.scroll(0, distance + from);
         options.callback(target);
       }
     };

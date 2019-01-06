@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../dist/moveTo.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div id="container">
+        <div id="content">
+            1<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            2<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            3<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+            <div id="target">target</div>
+
+            4<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            5<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        </div>
+    </div>
+
+    <style>
+        #container {
+            width: 300px;
+            border: 1px solid #000;
+            height: 700px;
+            overflow: scroll;
+        }
+        #content {
+            width: 100%;
+            background-color: #ff6600;
+            font-size: 50px;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            new MoveTo({
+                tolerance: 0,
+                duration: 800,
+                easing: 'easeOutQuart',
+                container: document.getElementById('container'),
+            }).move(document.getElementById('target'));
+        }
+    </script>
+</body>
+</html>
