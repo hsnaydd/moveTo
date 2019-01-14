@@ -46,6 +46,7 @@ test('It should set defaults', (t) => {
   t.not(inst.options.duration, undefined);
   t.not(inst.options.easing, undefined);
   t.not(inst.options.callback, undefined);
+  t.not(inst.options.container, undefined);
 });
 
 test('It should pass ease function(s) when creating instance', (t) => {
@@ -141,6 +142,35 @@ test.serial.cb('It should scroll to target element', (t) => {
   setTimeout(() => {
     // revert scroll.
     window.scroll = originalScroll;
+
+    t.is(calls[calls.length - 1], 1500);
+
+    t.end();
+  }, 1000);
+});
+
+test.serial.cb('It should scroll to target position inside an element', (t) => {
+  const container = document.createElement('div');
+
+  document.body.appendChild(container);
+
+  const inst = new MoveTo({
+    container: container
+  });
+
+  const calls = [];
+
+  // mock scroll.
+  const originalScroll = container.scroll;
+  container.scroll = function(_, y) {
+    calls.push(y);
+  };
+
+  inst.move(1500);
+
+  setTimeout(() => {
+    // revert scroll.
+    container.scroll = originalScroll;
 
     t.is(calls[calls.length - 1], 1500);
 
