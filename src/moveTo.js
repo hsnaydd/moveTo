@@ -8,8 +8,8 @@ const MoveTo = (() => {
     tolerance: 0,
     duration: 800,
     easing: 'easeOutQuart',
-    callback: function() {},
     container: window,
+    callback: function() {},
   };
 
   /**
@@ -62,7 +62,7 @@ const MoveTo = (() => {
    * @return {number}
    */
   function countScrollTop(container) {
-    if (container instanceof HTMLElement){
+    if (container instanceof HTMLElement) {
       return container.scrollTop;
     }
     return container.pageYOffset;
@@ -126,12 +126,12 @@ const MoveTo = (() => {
     let distance = typeof target === 'number' ? target : target.getBoundingClientRect().top;
     const from = countScrollTop(options.container);
     let startTime = null;
-    let lastPageYOffset;
+    let lastYOffset;
     distance -= options.tolerance;
 
     // rAF loop
     const loop = (currentTime) => {
-      let currentPageYOffset = countScrollTop(this.options.container);
+      let currentYOffset = countScrollTop(this.options.container);
 
       if (!startTime) {
         // To starts time from 1, we subtracted 1 from current time
@@ -142,19 +142,17 @@ const MoveTo = (() => {
 
       const timeElapsed = currentTime - startTime;
 
-      if (lastPageYOffset) {
+      if (lastYOffset) {
         if (
-          (distance > 0 && lastPageYOffset > currentPageYOffset) ||
-          (distance < 0 && lastPageYOffset < currentPageYOffset)
+          (distance > 0 && lastYOffset > currentYOffset) ||
+          (distance < 0 && lastYOffset < currentYOffset)
         ) {
           return options.callback(target);
         }
       }
-      lastPageYOffset = currentPageYOffset;
+      lastYOffset = currentYOffset;
 
-      const val = this.easeFunctions[options.easing](
-        timeElapsed, from, distance, options.duration
-      );
+      const val = this.easeFunctions[options.easing](timeElapsed, from, distance, options.duration);
 
       options.container.scroll(0, val);
 

@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.7.4 (06-01-2019 19:51)
+ * Version 1.7.4 (14-01-2019 13:03)
  * Licensed under MIT
  * Copyright 2019 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
@@ -15,18 +15,18 @@ var MoveTo = function () {
     tolerance: 0,
     duration: 800,
     easing: 'easeOutQuart',
-    callback: function callback() {},
-    container: window };
+    container: window,
+    callback: function callback() {} };
 
 
   /**
-                          * easeOutQuart Easing Function
-                          * @param  {number} t - current time
-                          * @param  {number} b - start value
-                          * @param  {number} c - change in value
-                          * @param  {number} d - duration
-                          * @return {number} - calculated value
-                          */
+                                         * easeOutQuart Easing Function
+                                         * @param  {number} t - current time
+                                         * @param  {number} b - start value
+                                         * @param  {number} c - change in value
+                                         * @param  {number} d - duration
+                                         * @return {number} - calculated value
+                                         */
   function easeOutQuart(t, b, c, d) {
     t /= d;
     t--;
@@ -133,12 +133,12 @@ var MoveTo = function () {
     var distance = typeof target === 'number' ? target : target.getBoundingClientRect().top;
     var from = countScrollTop(options.container);
     var startTime = null;
-    var lastPageYOffset = void 0;
+    var lastYOffset = void 0;
     distance -= options.tolerance;
 
     // rAF loop
     var loop = function loop(currentTime) {
-      var currentPageYOffset = countScrollTop(_this2.options.container);
+      var currentYOffset = countScrollTop(_this2.options.container);
 
       if (!startTime) {
         // To starts time from 1, we subtracted 1 from current time
@@ -149,19 +149,17 @@ var MoveTo = function () {
 
       var timeElapsed = currentTime - startTime;
 
-      if (lastPageYOffset) {
+      if (lastYOffset) {
         if (
-        distance > 0 && lastPageYOffset > currentPageYOffset ||
-        distance < 0 && lastPageYOffset < currentPageYOffset)
+        distance > 0 && lastYOffset > currentYOffset ||
+        distance < 0 && lastYOffset < currentYOffset)
         {
           return options.callback(target);
         }
       }
-      lastPageYOffset = currentPageYOffset;
+      lastYOffset = currentYOffset;
 
-      var val = _this2.easeFunctions[options.easing](
-      timeElapsed, from, distance, options.duration);
-
+      var val = _this2.easeFunctions[options.easing](timeElapsed, from, distance, options.duration);
 
       options.container.scroll(0, val);
 
