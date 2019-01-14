@@ -1,8 +1,8 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.7.4 (28-09-2018 16:02)
+ * Version 1.7.4 (14-01-2019 13:03)
  * Licensed under MIT
- * Copyright 2018 Hasan Aydoğdu <hsnaydd@gmail.com>
+ * Copyright 2019 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
 
 'use strict';
@@ -15,6 +15,7 @@ var MoveTo = function () {
     tolerance: 0,
     duration: 800,
     easing: 'easeOutQuart',
+    container: window,
     callback: function callback() {} };
 
 
@@ -60,6 +61,18 @@ var MoveTo = function () {
     return val.replace(/([A-Z])/g, function ($1) {
       return '-' + $1.toLowerCase();
     });
+  };
+
+  /**
+      * Count a number of item scrolled top
+      * @param  {Window|HTMLElement} container
+      * @return {number}
+      */
+  function countScrollTop(container) {
+    if (container instanceof HTMLElement) {
+      return container.scrollTop;
+    }
+    return container.pageYOffset;
   };
 
   /**
@@ -118,14 +131,14 @@ var MoveTo = function () {
     options = mergeObject(this.options, options);
 
     var distance = typeof target === 'number' ? target : target.getBoundingClientRect().top;
-    var from = window.pageYOffset;
+    var from = countScrollTop(options.container);
     var startTime = null;
-    var lastPageYOffset = void 0;
+    var lastYOffset = void 0;
     distance -= options.tolerance;
 
     // rAF loop
     var loop = function loop(currentTime) {
-      var currentPageYOffset = window.pageYOffset;
+      var currentYOffset = countScrollTop(_this2.options.container);
 
       if (!startTime) {
         // To starts time from 1, we subtracted 1 from current time
@@ -136,26 +149,24 @@ var MoveTo = function () {
 
       var timeElapsed = currentTime - startTime;
 
-      if (lastPageYOffset) {
+      if (lastYOffset) {
         if (
-        distance > 0 && lastPageYOffset > currentPageYOffset ||
-        distance < 0 && lastPageYOffset < currentPageYOffset)
+        distance > 0 && lastYOffset > currentYOffset ||
+        distance < 0 && lastYOffset < currentYOffset)
         {
           return options.callback(target);
         }
       }
-      lastPageYOffset = currentPageYOffset;
+      lastYOffset = currentYOffset;
 
-      var val = _this2.easeFunctions[options.easing](
-      timeElapsed, from, distance, options.duration);
+      var val = _this2.easeFunctions[options.easing](timeElapsed, from, distance, options.duration);
 
-
-      window.scroll(0, val);
+      options.container.scroll(0, val);
 
       if (timeElapsed < options.duration) {
         window.requestAnimationFrame(loop);
       } else {
-        window.scroll(0, distance + from);
+        options.container.scroll(0, distance + from);
         options.callback(target);
       }
     };
