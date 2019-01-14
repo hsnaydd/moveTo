@@ -1,6 +1,6 @@
 {
   "name": "moveto",
-  "version": "1.7.4",
+  "version": "1.8.0",
   "description": "A lightweight scroll animation javascript library without any dependency.",
   "main": "dist/moveTo.js",
   "scripts": {

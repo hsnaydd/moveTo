@@ -1,6 +1,6 @@
 /*!
  * MoveTo - A lightweight scroll animation javascript library without any dependency.
- * Version 1.7.4 (14-01-2019 13:03)
+ * Version 1.8.0 (14-01-2019 13:15)
  * Licensed under MIT
  * Copyright 2019 Hasan Aydoğdu <hsnaydd@gmail.com>
  */
