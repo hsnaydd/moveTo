@@ -31,7 +31,7 @@ const banner = [
 
 
 gulp.task('scripts:lint', (cb) => {
-  return gulp.src('src/scripts/**/*.js')
+  return gulp.src('src/**/*.js')
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe(browserSync.active ? $.util.noop() : $.eslint.failOnError());
