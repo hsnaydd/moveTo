@@ -131,7 +131,7 @@ const MoveTo = (() => {
 
     // rAF loop
     const loop = (currentTime) => {
-      let currentYOffset = countScrollTop(this.options.container);
+      const currentYOffset = countScrollTop(this.options.container);
 
       if (!startTime) {
         // To starts time from 1, we subtracted 1 from current time
@@ -186,7 +186,7 @@ const MoveTo = (() => {
     const domOptions = {};
 
     Object.keys(options).forEach((key) => {
-      let value = dom.getAttribute(`data-mt-${kebabCase(key)}`);
+      const value = dom.getAttribute(`data-mt-${kebabCase(key)}`);
       if (value) {
         domOptions[key] = isNaN(value) ? value : parseInt(value, 10);
       }
