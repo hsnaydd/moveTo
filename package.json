@@ -1,10 +1,14 @@
 {
   "name": "moveto",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "A lightweight scroll animation javascript library without any dependency.",
   "main": "dist/moveTo.js",
   "scripts": {
-    "test": "ava tests/**"
+    "gulp": "gulp",
+    "test": "ava tests/**",
+    "lint": "gulp scripts:lint",
+    "build": "yarn gulp build",
+    "start": "yarn build && yarn gulp serve"
   },
   "repository": {
     "type": "git",
@@ -27,34 +31,25 @@
   },
   "homepage": "https://github.com/hsnaydd/moveTo#readme",
   "devDependencies": {
-    "ava": "^0.25.0",
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "ava": "^1.4.1",
     "babel-eslint": "^10.0.1",
-    "babel-preset-es2015": "^6.22.0",
     "browser-sync": "^2.24.7",
+    "del": "^4.1.1",
     "eslint": "^5.6.0",
-    "eslint-config-google": "^0.10.0",
+    "eslint-config-google": "^0.12.0",
     "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.1",
+    "gulp-babel": "^8.0.0",
     "gulp-eslint": "^5.0.0",
     "gulp-header": "^2.0.5",
     "gulp-load-plugins": "^1.5.0",
     "gulp-rename": "^1.4.0",
     "gulp-uglify": "^3.0.1",
     "gulp-util": "^3.0.8",
-    "jsdom": "12.0.0",
+    "jsdom": "15.0.0",
     "jsdom-global": "3.0.2",
     "lazypipe": "^1.0.1",
     "run-sequence": "^2.2.1"
-  },
-  "ava": {
-    "require": [
-      "babel-register"
-    ],
-    "babel": {
-      "presets": [
-        "es2015"
-      ]
-    }
   }
 }
