@@ -45,7 +45,7 @@ gulp.task('scripts', ['scripts:lint'], () => {
     .pipe(gulp.dest, 'dist/');
 
   return gulp.src('src/**/*.js')
-    .pipe($.babel())
+    .pipe($.babel({presets: ['@babel/preset-env']}))
     .pipe($.header(banner))
     .pipe(gulp.dest('dist'))
     .pipe(scriptsMinChannel());
