@@ -225,15 +225,27 @@ $ npm install
 
 # To start the development server run:
 
-$ gulp serve
+$ yarn start
+
+# Or so if using npm:
+
+$ npm run start
 
 # To lint your code run:
 
-$ gulp scripts:lint
+$ yarn lint
+
+# Or so if using npm:
+
+$ npm run lint
 
 # To make a full new build run:
 
-$ gulp build
+$ yarn build
+
+# Or so if using npm:
+
+$ npm run build
 
 # To run tests:
 

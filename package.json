@@ -4,7 +4,11 @@
   "description": "A lightweight scroll animation javascript library without any dependency.",
   "main": "dist/moveTo.js",
   "scripts": {
-    "test": "ava tests/**"
+    "gulp": "gulp",
+    "test": "ava tests/**",
+    "lint": "gulp scripts:lint",
+    "build": "yarn gulp build",
+    "start": "yarn build && yarn gulp serve"
   },
   "repository": {
     "type": "git",
