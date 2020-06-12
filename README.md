@@ -43,7 +43,7 @@ moveTo.registerTrigger(trigger);
 
 Trigger HTML markup
 
-You can pass all options as data attributes with `mt` prefix. Option name should be written in kebab case format, for example:
+You can pass all options as data attributes with the `mt` prefix. Option name should be written in kebab case format, for example:
 
 ```html
 <a href="#target" class="js-trigger" data-mt-duration="300">Trigger</a>
@@ -55,7 +55,7 @@ You can pass all options as data attributes with `mt` prefix. Option name should
 
 ## Options
 
-The default options are as follows:
+The following options are available:
 
 ```js
 new MoveTo({
@@ -66,7 +66,7 @@ new MoveTo({
 })
 ```
 
-| Option    | Default      | Desctiption                                                                          |
+| Option    | Default      | Description                                                                          |
 |-----------|--------------|--------------------------------------------------------------------------------------|
 | tolerance | 0            | The tolerance of the target to be scrolled, can be negative or positive              |
 | duration  | 800          | Duration of scrolling, in milliseconds                                               |
@@ -78,7 +78,7 @@ new MoveTo({
 
 ### move(target, options)
 
-Start scroll animation from current position to the anchor point
+Start scroll animation from current position to the anchor point.
 
 #### target
 Type: HTMLElement|Number
@@ -99,7 +99,7 @@ This is the trigger element for starting to scroll when on click.
 
 #### callback
 
-This is the callback function to be run after the scroll complete. This will overwrite the callback option.
+This is the callback function to be ran after the scroll completes. This will overwrite the callback option.
 
 ### addEaseFunction(name, fn)
 
@@ -113,12 +113,12 @@ Ease function name.
 #### fn
 Type: Function
 
-Ease function. See [Easing Equations](http://gizma.com/easing/) for more ease function.
+Ease function. See [Easing Equations](http://gizma.com/easing/) for more ease functions.
 
 ## Examples
 
 <details>
-  <summary>Pass ease function(s) when creating instance</summary>
+  <summary>Pass ease function(s) when creating an instance</summary>
 
   ```js
   document.addEventListener('DOMContentLoaded', function () {
