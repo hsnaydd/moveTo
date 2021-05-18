@@ -34,25 +34,26 @@
     "node": ">=8.9.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "ava": "^2.2.0",
-    "babel-eslint": "^10.0.2",
-    "browser-sync": "^2.26.7",
-    "del": "^5.0.0",
-    "eslint": "^6.1.0",
-    "eslint-config-google": "^0.13.0",
-    "gulp": "^3.9.1",
+    "@ava/babel": "^1.0.1",
+    "@babel/core": "^7.14.3",
+    "@babel/eslint-parser": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "ava": "^3.15.0",
+    "browser-sync": "^2.26.14",
+    "del": "^6.0.0",
+    "eslint": "^7.26.0",
+    "eslint-config-google": "^0.14.0",
+    "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-eslint": "^6.0.0",
     "gulp-header": "^2.0.9",
-    "gulp-load-plugins": "^2.0.0",
-    "gulp-rename": "^1.4.0",
+    "gulp-rename": "^2.0.0",
     "gulp-uglify": "^3.0.1",
-    "gulp-util": "^3.0.8",
-    "jsdom": "15.1.1",
+    "jsdom": "16.5.3",
     "jsdom-global": "3.0.2",
-    "lazypipe": "^1.0.1",
-    "run-sequence": "^2.2.1"
-  }
+    "lazypipe": "^1.0.1"
+  },
+  "ava": {
+		"babel": true
+	}
 }
