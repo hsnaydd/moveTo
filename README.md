@@ -1,4 +1,4 @@
-# MoveTo [![npm version](https://badge.fury.io/js/moveto.svg)](https://badge.fury.io/js/moveto) [![Bower version](https://badge.fury.io/bo/moveTo.svg)](https://badge.fury.io/bo/moveTo) [![CDNJS version](https://img.shields.io/cdnjs/v/moveTo.svg)](https://cdnjs.com/libraries/moveTo) [![Build Status](https://travis-ci.org/hsnaydd/moveTo.svg?branch=master)](https://travis-ci.org/hsnaydd/moveTo.js)
+# MoveTo [![npm version](https://badge.fury.io/js/moveto.svg)](https://badge.fury.io/js/moveto) [![CDNJS version](https://img.shields.io/cdnjs/v/moveTo.svg)](https://cdnjs.com/libraries/moveTo) [![Build Status](https://travis-ci.org/hsnaydd/moveTo.svg?branch=master)](https://travis-ci.org/hsnaydd/moveTo.js)
 
 A lightweight (only 1kb gzipped) scroll animation javascript library without any dependency.
 
@@ -16,12 +16,6 @@ $ npm install moveto --save
 
 ```sh
 $ yarn add moveto
-```
-
-### Using Bower
-
-```sh
-$ bower install moveTo --save
 ```
 
 ## Usage
