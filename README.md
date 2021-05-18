@@ -258,7 +258,7 @@ $ npm test
 
 ## Browser support
 
-It should work in the current stable releases of Chrome, Firefox, Safari as well as IE10 and up. To add support for older browsers, consider including polyfills/shims for the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame).
+It should work in the current stable releases of Chrome, Firefox, Safari and Edge. To add support for older browsers, consider including polyfills/shims for the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) and [Element.scroll](https://github.com/idmadj/element-scroll-polyfill).
 
 ## License
 
