@@ -1,4 +1,4 @@
-# MoveTo [![npm version](https://badge.fury.io/js/moveto.svg)](https://badge.fury.io/js/moveto) [![CDNJS version](https://img.shields.io/cdnjs/v/moveTo.svg)](https://cdnjs.com/libraries/moveTo) [![Build Status](https://travis-ci.org/hsnaydd/moveTo.svg?branch=master)](https://travis-ci.org/hsnaydd/moveTo.js)
+# MoveTo [![Version](https://img.shields.io/npm/v/moveto.svg?style=flat)](https://www.npmjs.com/package/moveto) [![CDNJS version](https://img.shields.io/cdnjs/v/moveTo.svg?style=flat)](https://cdnjs.com/libraries/moveTo) [![CI Status](https://github.com/hsnaydd/moveTo/actions/workflows/pr.yml/badge.svg)](https://github.com/hsnaydd/moveTo/actions/workflows/pr.yml)
 
 A lightweight (only 1kb gzipped) scroll animation javascript library without any dependency.
 
