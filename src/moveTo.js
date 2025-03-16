@@ -94,6 +94,10 @@ const MoveTo = (() => {
     const target =
       (href && href !== '#') ? document.getElementById(href.substring(1)) : document.body;
     const options = mergeObject(this.options, _getOptionsFromTriggerDom(dom, this.options));
+    if (!target) {
+  console.error('Target element not found');
+  return;
+}
 
     if (typeof callback === 'function') {
       options.callback = callback;
